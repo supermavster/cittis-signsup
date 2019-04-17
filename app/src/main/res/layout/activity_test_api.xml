@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#FFFFFF"
-              tools:context=".TestAPIActivity">
+              tools:context=".connection.TestAPIActivity">
     <TextView
             android:id="@+id/resultTextView"
             android:padding="12dp"

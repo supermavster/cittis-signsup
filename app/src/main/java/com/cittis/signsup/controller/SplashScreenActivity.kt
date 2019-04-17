@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import com.cittis.signsup.R
-import com.cittis.signsup.TestAPIActivity
+import com.cittis.signsup.connection.TestAPIActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 

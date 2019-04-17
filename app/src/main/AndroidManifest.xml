@@ -19,8 +19,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".test_api">
-        </activity>
         <activity
                 android:name=".controller.SplashScreenActivity"
                 android:theme="@style/AppTheme.NoActionBar">
@@ -31,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".controller.MainActivity"/>
-        <activity android:name=".TestAPIActivity"/>
+        <activity android:name=".connection.TestAPIActivity"/>
     </application>
 
 </manifest>
