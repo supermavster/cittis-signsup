@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import com.cittis.signsup.R
+import com.cittis.signsup.TestAPIActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class SplashScreenActivity : AppCompatActivity() {
         // This method will be executed once the timer is over
         Handler().postDelayed({
             // Start your app main activity
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, TestAPIActivity::class.java))
             // close this activity
             finish()
         }, SPLASH_TIME_OUT)
