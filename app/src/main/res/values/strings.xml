@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">SignsUp</string>
 
+    // Login
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Ingresar</string>
+    <string name="forget_password">¿Olvido la contraseña?</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
