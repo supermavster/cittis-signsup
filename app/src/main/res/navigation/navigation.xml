@@ -10,8 +10,11 @@
             android:label="Blank"
             tools:layout="@layout/fragment_login">
         <argument android:name="isLogin" app:argType="boolean"/>
+        <action android:id="@+id/action_login_to_municipalities" app:destination="@id/municipalities"/>
 
     </fragment>
+    <fragment android:id="@+id/municipalities" android:name="com.cittis.signsup.view.Municipalities"
+              android:label="fragment_municipalities" tools:layout="@layout/fragment_municipalities"/>
 
 
 </navigation>
