@@ -1,13 +1,12 @@
 package com.cittis.signsup.connection
 
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.support.v4.app.FragmentActivity
+import android.support.v4.app.Fragment
 import android.view.Window
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
@@ -67,7 +66,7 @@ class RequestQueueService private constructor(context: Context) {
         }
 
         //To show alert / error message
-        fun showAlert(message: String, context: FragmentActivity) {
+        fun showAlert(message: String, context: Context) {
             try {
                 val builder = AlertDialog.Builder(context)
                 builder.setTitle("Error!")
@@ -82,13 +81,13 @@ class RequestQueueService private constructor(context: Context) {
         }
 
         //Start showing progress
-        fun showProgressDialog(activity: Activity) {
-            activity.runOnUiThread {
+        fun showProgressDialog(fragment: Fragment, context: Context) {
+            fragment.activity!!.runOnUiThread {
                 if (mProgressDialog != null) {
                     if (mProgressDialog!!.isShowing == true) cancelProgressDialog()
                 }
 
-                mProgressDialog = Dialog(activity)
+                mProgressDialog = Dialog(context)
                 mProgressDialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
                 mProgressDialog!!.setContentView(R.layout.progress_indicator)
                 mProgressDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

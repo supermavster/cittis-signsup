@@ -1,16 +1,9 @@
 package com.cittis.signsup.connection
 
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import com.cittis.signsup.R
-import com.cittis.signsup.actions.FetchDataListener
-import org.json.JSONObject
 
 class TestAPIActivity : AppCompatActivity() {
+    /*
     private var resultTextView: TextView? = null
     //Implementing interfaces of FetchDataListener for GET api request
     internal var fetchGetResultListener: FetchDataListener = object : FetchDataListener {
@@ -111,18 +104,6 @@ class TestAPIActivity : AppCompatActivity() {
     private var getApiBtn: Button? = null
     private var postApiBtn: Button? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test_api)
-        resultTextView = findViewById(R.id.resultTextView)
-        getApiBtn = findViewById(R.id.getApiBtn)
-        postApiBtn = findViewById(R.id.postApiBtn)
-
-        //Attaching OnClickListener with Buttons
-        getApiBtn!!.setOnClickListener(getApiListener)
-        postApiBtn!!.setOnClickListener(postApiListener)
-    }
-
     private fun getApiCall() {
         try {
             //Create Instance of GETAPIRequest and call it's
@@ -163,5 +144,19 @@ class TestAPIActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_test_api)
+        resultTextView = findViewById(R.id.resultTextView)
+        getApiBtn = findViewById(R.id.getApiBtn)
+        postApiBtn = findViewById(R.id.postApiBtn)
+
+        //Attaching OnClickListener with Buttons
+        getApiBtn!!.setOnClickListener(getApiListener)
+        postApiBtn!!.setOnClickListener(postApiListener)
+    }
+
+*/
 }
 

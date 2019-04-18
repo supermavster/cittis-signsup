@@ -14,12 +14,14 @@ class GETAPIRequest {
     @Throws(JSONException::class)
     fun request(context: Context, listener: FetchDataListener?, ApiURL: String) {
         listener?.onFetchStart()
-        //base server URL
+        /*/base server URL
         val baseUrl = "http://studypeek.com/test/"
         //add extension api url received from caller
         //and make full api
         val url = baseUrl + ApiURL
-        val postRequest = JsonObjectRequest(Request.Method.GET, url, null,
+        */
+        val postRequest = JsonObjectRequest(
+            Request.Method.GET, ApiURL, null,
             Response.Listener { response ->
                 try {
                     if (listener != null) {

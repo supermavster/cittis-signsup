@@ -1,12 +1,12 @@
 package com.cittis.signsup.view
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.cittis.signsup.R
 import com.cittis.signsup.connection.DataBase
 
@@ -35,10 +35,28 @@ class Login : Fragment() {
         viewMain = inflater.inflate(R.layout.fragment_login, container, false)
 
         // Init Process
-        //initProcess()
+        initProcess()
 
         // Return Data
         return viewMain
+    }
+
+    private fun initProcess() {
+
+        // Data Base
+        var connection: DataBase = DataBase(viewMain.context, this)
+        connection.loginCall()
+        viewMain.findViewById<Button>(R.id.btn_login).setOnClickListener {
+            // Call the API
+
+            //connection.postApiCall()
+            connection.loginCall()
+            Log.e("Data", connection.resultTextView.toString())
+            Log.e("Data", connection.resultTextView.toString())
+            Log.e("Data", connection.resultTextView.toString())
+            Log.e("Data", connection.resultTextView.toString())
+        }
+
     }
 
 }

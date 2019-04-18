@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.cittis.signsup.R
-import com.cittis.signsup.connection.DataBase
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -14,9 +13,6 @@ class MainActivity : AppCompatActivity() {
     // Main Variables
     var mainActivity: Activity = this
     var maxID: String = ""
-
-    // Data Base
-    var connection: DataBase = DataBase(this)
 
     // Exception
     var exceptionMain: Boolean = false

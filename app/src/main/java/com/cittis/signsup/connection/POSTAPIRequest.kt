@@ -14,13 +14,9 @@ class POSTAPIRequest {
     @Throws(JSONException::class)
     fun request(context: Context, listener: FetchDataListener?, params: JSONObject, ApiURL: String) {
         listener?.onFetchStart()
-        //base server URL
-        val baseUrl = "http://studypeek.com/test/"
-        //add extension api url received from caller
-        //and make full api
-        val url = baseUrl + ApiURL
         //Requesting with post body as params
-        val postRequest = JsonObjectRequest(Request.Method.POST, url, params,
+        val postRequest = JsonObjectRequest(
+            Request.Method.POST, ApiURL, params,
             Response.Listener { response ->
                 try {
                     if (listener != null) {
