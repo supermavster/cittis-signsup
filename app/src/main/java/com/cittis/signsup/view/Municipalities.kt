@@ -1,12 +1,15 @@
 package com.cittis.signsup.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.cittis.signsup.R
 import com.cittis.signsup.connection.DataBase
+import com.cittis.signsup.controller.Tracking
 
 
 class Municipalities : Fragment() {
@@ -31,6 +34,11 @@ class Municipalities : Fragment() {
         viewMain = inflater.inflate(R.layout.fragment_municipalities, container, false)
         // Init Connection
         //connection = DAOConnection(viewMain.context)
+        viewMain.findViewById<Button>(R.id.btnNotify).setOnClickListener {
+            val intent = Intent(viewMain.context, Tracking::class.java)
+            // start your next activity
+            startActivity(intent)
+        }
         return viewMain
     }
 

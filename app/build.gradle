@@ -47,6 +47,11 @@ dependencies {
     // Firebase UI
     // Used in FirebaseUIActivity.
     implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+
+
+    // Firebase DataBase
+    implementation 'com.google.firebase:firebase-database:16.1.0'
 
 
 }

@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/login"
-            android:name="com.cittis.signsup.view.Login"
+            android:name="com.cittis.signsup.controller.Login"
             android:label="Blank"
             tools:layout="@layout/fragment_login">
         <argument android:name="isLogin" app:argType="boolean"/>

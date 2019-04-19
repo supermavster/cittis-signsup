@@ -1,4 +1,4 @@
-package com.cittis.signsup.view
+package com.cittis.signsup.controller
 
 import android.app.ProgressDialog
 import android.content.Context

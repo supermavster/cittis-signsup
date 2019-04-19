@@ -29,6 +29,12 @@
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="firebase_user_management">Firebase User Management</string>
 
+    <!-- Tracking -->
+    <string name="tracking_enabled_notif">Tracking is currently enabled. Tap to cancel.</string>
+    <string name="test_email">mtorres@cittus.com</string>
+    <string name="test_password">Mavster.1</string>
+    <string name="firebase_path">location</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
