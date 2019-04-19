@@ -40,7 +40,7 @@
                 android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".DisplayActivity"
+                android:name=".controller.firebase.tracking.DisplayActivity"
                 android:label="@string/title_activity_display">
         </activity>
 

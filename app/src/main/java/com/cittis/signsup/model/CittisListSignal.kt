@@ -5,7 +5,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class CittisListSignal(
-    val login: Int
+    var dataUser: DataUser?
     //var municipality: Municipalities?,
     //var signal: ArrayList<CittusISV>?,
     //var geolocationCardinalImages: ArrayList<GeolocationCardinalImages>?
@@ -20,8 +20,16 @@ data class CittisListSignal(
 
     }
 
+    constructor(dataUser: Parcel) : this(
+        dataUser.readParcelable<DataUser>(DataUser::class.java.classLoader)
+        //source.readParcelable(DataUser::class.java.classLoader)
+    )
+
+    /*
     constructor(source: Parcel) : this(
-        source.readInt()
+
+        //source.readParcelable(DataUser::class.java.classLoader)
+        //source.readParcelable(DataUser::class.java.classLoader)
         /*  source.readParcelable(Municipalities::class.java.classLoader),
         arrayListOf<CittusISV>().apply {
             source.readArrayList(CittusISV::class.java.classLoader)
@@ -29,11 +37,11 @@ data class CittisListSignal(
         arrayListOf<GeolocationCardinalImages>().apply {
             source.readArrayList(GeolocationCardinalImages::class.java.classLoader)
         }*/
-    )
+    )*/
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.let {
-            dest.writeInt(login)
+            dest.writeParcelable(dataUser, flags)
             /*/ Data Municipality
             dest.writeParcelable(municipality, flags)
             // Cittus ISV - Signal
@@ -59,6 +67,6 @@ data class CittisListSignal(
 
     override fun toString(): String {
         //return "[{\"CittusListSignal\":{\"login\":\"$login\",$municipality,\"CittusISV\":{$signal},\"GeolocationCardinalImages\":{$geolocationCardinalImages}}}]"
-        return "[{\"CittusListSignal\":{\"login\":\"$login\"}}]"
+        return "[{\"CittusListSignal\":{$dataUser,}}]"
     }
 }

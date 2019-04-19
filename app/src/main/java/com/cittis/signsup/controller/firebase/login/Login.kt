@@ -2,6 +2,7 @@ package com.cittis.signsup.controller.firebase.login
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
@@ -14,8 +15,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.navigation.Navigation
 import com.cittis.signsup.R
+import com.cittis.signsup.actions.EndPoints
 import com.cittis.signsup.connection.DataBase
+import com.cittis.signsup.controller.firebase.tracking.TrackerService
 import com.cittis.signsup.model.CittisListSignal
+import com.cittis.signsup.model.DataUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -158,29 +162,6 @@ class Login : Fragment() {
         // [END sign_in_with_email]
     }
 
-    private fun checkLogin(user: FirebaseUser?) {
-        // Check Login - Email Verification
-        var isLogin = user!!.isEmailVerified
-        if (isLogin) {
-
-
-            // Start Main Object
-            var isLoginInt = 1
-            // Make Object Main
-            var cittisDB: CittisListSignal = CittisListSignal(isLoginInt)
-            // Show Data
-            Log.e("Data-Login", cittisDB.toString())
-            // Set and Send Data Main
-            bundle.putParcelable("CittiDB", cittisDB)
-            // Init Action
-            Navigation.findNavController(viewMain).navigate(R.id.municipalities, bundle)
-        } else {
-            Toast.makeText(
-                viewMain.context, "Please Verify Email.",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
 
     private fun setSignOut() {
         viewMain.findViewById<Button>(R.id.signOutButton).setOnClickListener {
@@ -261,6 +242,44 @@ class Login : Fragment() {
         }
     }
 
+
+    private fun checkLogin(user: FirebaseUser?) {
+        // Check Login - Email Verification
+        var isLogin = user!!.isEmailVerified
+        if (isLogin) {
+
+            // Flag Data - Traking
+            EndPoints.FireBaseID = user.uid
+
+            // Data - User
+            var dataUser = DataUser(user.email.toString(), user.uid, user.isEmailVerified.toInt())
+            EndPoints.FireBasePath = dataUser.firebase_path
+
+
+            // Make Object Main
+            var cittisDB: CittisListSignal = CittisListSignal(dataUser)
+            // Show Data
+            Log.e("Data-Login", cittisDB.toString())
+            // Set and Send Data Main
+            bundle.putParcelable("CittisDB", cittisDB)
+            // Start Tracking
+            startServiceTracking()
+            // Init Action
+            Navigation.findNavController(viewMain).navigate(R.id.municipalities, bundle)
+        } else {
+            Toast.makeText(
+                viewMain.context, "Please Verify Email.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun startServiceTracking() {
+        val intent = Intent(viewMain.context, TrackerService::class.java)
+        // start your next activity
+        viewMain.context.startService(intent)
+    }
+
     @VisibleForTesting
     val progressDialog by lazy {
         ProgressDialog(viewMain.context)
@@ -309,6 +328,8 @@ class Login : Fragment() {
 
         return valid
     }
+
+    fun Boolean.toInt() = if (this) 1 else 0
 
 
 }

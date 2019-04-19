@@ -3,7 +3,6 @@ package com.cittis.signsup.controller
 import android.Manifest
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
@@ -13,7 +12,6 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.cittis.signsup.R
-import com.cittis.signsup.controller.firebase.tracking.TrackerService
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -73,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startTrackerService() {
-        startService(Intent(this, TrackerService::class.java))
+        //startService(Intent(this, TrackerService::class.java))
         //finish()
     }
 
