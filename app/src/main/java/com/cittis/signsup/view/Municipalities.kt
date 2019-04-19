@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.cittis.signsup.DisplayActivity
 import com.cittis.signsup.R
 import com.cittis.signsup.connection.DataBase
-import com.cittis.signsup.controller.Tracking
 
 
 class Municipalities : Fragment() {
@@ -35,7 +35,7 @@ class Municipalities : Fragment() {
         // Init Connection
         //connection = DAOConnection(viewMain.context)
         viewMain.findViewById<Button>(R.id.btnNotify).setOnClickListener {
-            val intent = Intent(viewMain.context, Tracking::class.java)
+            val intent = Intent(viewMain.context, DisplayActivity::class.java)
             // start your next activity
             startActivity(intent)
         }

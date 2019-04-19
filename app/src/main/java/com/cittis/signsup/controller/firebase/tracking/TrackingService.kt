@@ -1,26 +1,7 @@
-package com.cittis.signsup
+package com.cittis.signsup.controller.firebase.tracking
 
-import android.Manifest
-import android.app.Notification
-import android.app.PendingIntent
-import android.app.Service
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.pm.PackageManager
-import android.os.IBinder
-import android.support.v4.content.ContextCompat
-import android.util.Log
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-
-class TrackingService : Service() {
-
+class TrackingService {
+/*
     protected var stopReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
 
@@ -140,5 +121,5 @@ class TrackingService : Service() {
     companion object {
 
         private val TAG = TrackingService::class.java.simpleName
-    }
+    }*/
 }

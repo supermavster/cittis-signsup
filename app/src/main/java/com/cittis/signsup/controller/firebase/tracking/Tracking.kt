@@ -1,4 +1,4 @@
-package com.cittis.signsup.controller
+package com.cittis.signsup.controller.firebase.tracking
 
 import android.Manifest
 import android.app.Activity
@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.widget.Toast
-import com.cittis.signsup.TrackingService
 
 class Tracking : Activity() {
 
@@ -21,7 +20,7 @@ class Tracking : Activity() {
 
         val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            finish()
+            //finish()
         }
 
         //Check whether this app has access to the location permission//
@@ -77,7 +76,7 @@ class Tracking : Activity() {
 
         //Close MainActivity//
 
-        finish()
+        //finish()
     }
 
     companion object {

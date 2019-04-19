@@ -1,4 +1,4 @@
-package com.cittis.signsup.controller
+package com.cittis.signsup.controller.firebase.login
 
 import android.app.ProgressDialog
 import android.content.Context
@@ -162,6 +162,8 @@ class Login : Fragment() {
         // Check Login - Email Verification
         var isLogin = user!!.isEmailVerified
         if (isLogin) {
+
+
             // Start Main Object
             var isLoginInt = 1
             // Make Object Main
