@@ -3,9 +3,10 @@ package com.cittis.signsup.actions
 
 object EndPoints {
 
+    @kotlin.jvm.JvmField
+    var FireBasePath: String = "locations"
     // Users
     var FireBaseID = ""
-    var FireBasePath = "locations"
 
     // Server
     // Server Main 172.20.1.14 172.20.1.19 192.168.43.137 172.20.1.13

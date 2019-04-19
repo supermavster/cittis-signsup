@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.cittis.signsup.R
+import com.cittis.signsup.actions.ActionsRequest
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show()
-            finish()
+            //finish()
         }
 
         // Check location permission is granted - if it is, start
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                MainActivity.PERMISSIONS_REQUEST
+                ActionsRequest.PERMISSIONS_REQUEST
             )
         }
     }
@@ -76,19 +77,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == PERMISSIONS_REQUEST && grantResults.size == 1
+        if (requestCode == ActionsRequest.PERMISSIONS_REQUEST && grantResults.size == 1
             && grantResults[0] == PackageManager.PERMISSION_GRANTED
         ) {
             // Start the service when the permission is granted
             startTrackerService()
         } else {
-            finish()
+            //finish()
         }
-    }
-
-    companion object {
-
-        private val PERMISSIONS_REQUEST = 1
     }
 
 }

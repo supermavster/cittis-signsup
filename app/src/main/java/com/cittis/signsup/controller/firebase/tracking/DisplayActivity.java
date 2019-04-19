@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import com.cittis.signsup.R;
+import com.cittis.signsup.actions.EndPoints;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -35,14 +36,14 @@ public class DisplayActivity extends FragmentActivity implements OnMapReadyCallb
     public void onMapReady(GoogleMap googleMap) {
         // Authenticate with Firebase when the Google map is loaded
         mMap = googleMap;
-        mMap.setMaxZoomPreference(16);
-        //
-        //
-        //                    subscribeToUpdates();
+        // TODO: Max Zoom
+        //mMap.setMaxZoomPreference(16);
+        // Update Location - Maps
+        subscribeToUpdates();
     }
 
     private void subscribeToUpdates() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("getString(R.string.firebase_path)");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(EndPoints.FireBasePath);
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {

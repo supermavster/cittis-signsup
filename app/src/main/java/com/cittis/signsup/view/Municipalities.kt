@@ -1,15 +1,12 @@
 package com.cittis.signsup.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import com.cittis.signsup.R
 import com.cittis.signsup.connection.DataBase
-import com.cittis.signsup.controller.firebase.tracking.DisplayActivity
 import com.cittis.signsup.model.CittisListSignal
 import com.cittis.signsup.model.DataUser
 
@@ -52,11 +49,12 @@ class Municipalities : Fragment() {
     }
 
     private fun initProcess() {
+        /** TODO: TRACKING (ALL Users)
         viewMain.findViewById<Button>(R.id.btnNotify).setOnClickListener {
-            val intent = Intent(viewMain.context, DisplayActivity::class.java)
-            // start your next activity
-            startActivity(intent)
-        }
+        val intent = Intent(viewMain.context, DisplayActivity::class.java)
+        // start your next activity
+        startActivity(intent)
+        }*/
     }
 
     private fun saveAndNext() {
