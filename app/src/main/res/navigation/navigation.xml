@@ -14,7 +14,11 @@
 
     </fragment>
     <fragment android:id="@+id/municipalities" android:name="com.cittis.signsup.view.Municipalities"
-              android:label="fragment_municipalities" tools:layout="@layout/fragment_municipalities"/>
+              android:label="fragment_municipalities" tools:layout="@layout/fragment_municipalities">
+        <action android:id="@+id/action_municipalities_to_typeRoad" app:destination="@id/typeRoad"/>
+    </fragment>
+    <fragment android:id="@+id/typeRoad" android:name="com.cittis.signsup.view.TypeRoad"
+              android:label="fragment_type_road" tools:layout="@layout/fragment_type_road"/>
 
 
 </navigation>

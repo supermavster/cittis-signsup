@@ -49,17 +49,17 @@
         <activity
                 android:name=".controller.SplashScreenActivity"
                 android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
-        <activity android:name=".TestAPIActivity"
-                  android:theme="@style/AppTheme.NoActionBar"
-        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name=".TestAPIActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+        >
+
         </activity>
 
         <activity android:name=".controller.MainActivity"/>

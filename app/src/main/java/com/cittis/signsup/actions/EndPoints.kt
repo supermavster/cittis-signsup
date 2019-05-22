@@ -10,7 +10,7 @@ object EndPoints {
 
     /** Server **/
     // Server Main 172.20.1.14 172.20.1.19 192.168.43.137 172.20.1.13
-    private const val SERVER_MAIN = "localhost"//""ivs.cittis.com.co"
+    private const val SERVER_MAIN = "cittis.com.co"//""ivs.cittis.com.co"
     private const val PATH_SOURCE = "http://$SERVER_MAIN/"
     private const val PATH_API = "${PATH_SOURCE}app?"
     private const val PATH_MAIN = "${PATH_SOURCE}controller/isv/"
@@ -56,8 +56,16 @@ object EndPoints {
     // Count Inventory By idSignal and idProject
     private const val URL_GET_COUNT_INVENTORY = "${PATH_API}count=inventario"//&idSignal=1&idProject=1
 
-    fun URL_GET_COUNT_INVENTORY(idSignal: String, idProject: String): String {
-        return "$URL_GET_COUNT_INVENTORY&idSignal=$idSignal&idProject=$idProject"//1
+    fun URL_GET_COUNT_INVENTORY(idUserFirebase: String): String {
+        return "$URL_GET_COUNT_INVENTORY&idUserFirebase=$idUserFirebase"//1
     }
+
+    // Get Max Id Signal for Project by Id User
+    private const val URL_GET_MAX_SIGNAL = "${PATH_API}maxID=signal"//&idSignal=1&idProject=1
+
+    fun URL_GET_MAX_SIGNAL(idUserFirebase: String): String {
+        return "$URL_GET_COUNT_INVENTORY&idUserFirebase=$idUserFirebase"//1
+    }
+
 
 }

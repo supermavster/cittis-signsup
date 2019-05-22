@@ -21,8 +21,12 @@ import androidx.navigation.Navigation
 import com.cittis.signsup.R
 import com.cittis.signsup.actions.ActionsRequest
 import com.cittis.signsup.actions.EndPoints
+import com.cittis.signsup.actions.FetchDataListener
 import com.cittis.signsup.connection.DataBase
+import com.cittis.signsup.connection.GETAPIRequest
+import com.cittis.signsup.connection.RequestQueueService
 import com.cittis.signsup.controller.firebase.tracking.TrackerService
+import com.cittis.signsup.controller.plugins.ConvertJSON
 import com.cittis.signsup.model.CittisListSignal
 import com.cittis.signsup.model.DataUser
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -33,10 +37,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import org.json.JSONObject
 
 class Login : Fragment() {
 
     // Main Variables
+    private var fragment = this
     private lateinit var viewMain: View
     private lateinit var connection: DataBase
     // Make Bundle
@@ -83,6 +89,7 @@ class Login : Fragment() {
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
         // [END initialize_auth]
+
 
         // Actions
         setSignIn()
@@ -261,11 +268,14 @@ class Login : Fragment() {
         // [END send_email_verification]
     }
 
+    private lateinit var userMain: FirebaseUser
+
     // [END on_start_check_user]
     private fun updateUI(user: FirebaseUser?) {
 
         hideProgressDialog()
         if (user != null) {
+            userMain = user
             /*viewMain.findViewById<TextView>(R.id.status).text = getString(
                 R.string.emailpassword_status_fmt,
                 user.email, user.isEmailVerified
@@ -281,7 +291,7 @@ class Login : Fragment() {
 
 
             // Check is Login and Verify
-            checkLogin(user)
+            checkLogin()
         } else {
             //viewMain.findViewById<TextView>(R.id.status).setText(R.string.signed_out)
             //viewMain.findViewById<TextView>(R.id.detail).text = null
@@ -293,29 +303,20 @@ class Login : Fragment() {
     }
 
 
-    private fun checkLogin(user: FirebaseUser?) {
+    private fun checkLogin() {
         // Check Login - Email Verification
-        var isLogin = user!!.isEmailVerified
+        var isLogin = userMain.isEmailVerified
         if (isLogin) {
 
             // Flag Data - Traking
-            EndPoints.FireBaseID = user.uid
-
-            // Data - User
-            var dataUser = DataUser(user.email.toString(), user.uid, user.isEmailVerified.toInt())
-            EndPoints.FireBasePath = dataUser.firebase_path
+            EndPoints.FireBaseID = userMain.uid
 
 
-            // Make Object Main
-            var cittisDB: CittisListSignal = CittisListSignal(dataUser)
-            // Show Data
-            Log.e("Data-Login", cittisDB.toString())
-            // Set and Send Data Main
-            bundle.putParcelable("CittisDB", cittisDB)
-            // Start Tracking
-            startServiceTracking()
-            // Init Action
-            Navigation.findNavController(viewMain).navigate(R.id.municipalities, bundle)
+            //** Id Project **/
+            var url = EndPoints.URL_GET_COUNT_INVENTORY(EndPoints.FireBaseID.toString())
+            Log.e("data", url)
+            getApiCall(url)
+
 
         } else {
             Toast.makeText(
@@ -382,5 +383,83 @@ class Login : Fragment() {
 
     fun Boolean.toInt() = if (this) 1 else 0
 
+    /** GET API */
+    private fun getApiCall(url: String) {
+        try {
+            //Create Instance of GETAPIRequest and call it's
+            //request() method
+            val getapiRequest = GETAPIRequest()
+            //Attaching only part of URL as base URL is given
+            //in our GETAPIRequest(of course that need to be same for all case)
+            getapiRequest.request(viewMain.context, fetchGetResultListener, url)
+            // Toast.makeText(viewMain.context, "GET API called", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
+    }
+
+    //Implementing interfaces of FetchDataListener for GET api request
+    private var fetchGetResultListener: FetchDataListener = object : FetchDataListener {
+        override fun onFetchComplete(data: JSONObject) {
+            //Fetch Complete. Now stop progress bar  or loader
+            //you started in onFetchStart
+            RequestQueueService.cancelProgressDialog()
+            try {
+                //Now check result sent by our GETAPIRequest class
+                if (data != null) {
+                    if (data.has("success")) {
+                        val success = data.getInt("success")
+                        if (success == 1) {
+                            val response = data.getJSONObject("response")
+                            if (response != null) {
+                                //Display the result
+                                //Or, You can do whatever you need to
+                                //do with the JSONObject
+                                var array = response.toString(4)
+                                var tempValue = ConvertJSON(array)["data"]
+
+
+                                // Data - User
+                                var dataUser =
+                                    DataUser(userMain.email.toString(), userMain.uid, userMain.isEmailVerified.toInt())
+                                EndPoints.FireBasePath = dataUser.firebase_path
+
+
+                                // Make Object Main
+                                var cittisDB: CittisListSignal = CittisListSignal(tempValue as Int, dataUser, null)
+                                // Show Data
+                                Log.e("Data-Login", cittisDB.toString())
+                                // Set and Send Data Main
+                                bundle.putParcelable("CittisDB", cittisDB)
+                                // Start Tracking
+                                startServiceTracking()
+                                // Init Action
+                                Navigation.findNavController(viewMain).navigate(R.id.municipalities, bundle)
+                            }
+                        } else {
+                            RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
+                        }
+                    }
+                } else {
+                    RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
+                }
+            } catch (e: Exception) {
+                RequestQueueService.showAlert("Something went wrong", viewMain.context)
+                e.printStackTrace()
+            }
+
+        }
+
+        override fun onFetchFailure(msg: String) {
+            RequestQueueService.cancelProgressDialog()
+            //Show if any error message is there called from GETAPIRequest class
+            RequestQueueService.showAlert(msg, viewMain.context)
+        }
+
+        override fun onFetchStart() {
+            //Start showing progressbar or any loader you have
+            RequestQueueService.showProgressDialog(fragment, viewMain.context)
+        }
+    }
 }
