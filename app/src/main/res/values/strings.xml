@@ -33,6 +33,22 @@
     <string name="notification_text">Tracking, tap to cancel</string>
     <string name="title_activity_display">Transport Display</string>
 
+    <!-- Init Activity -->
+    <string name="lbl_isv">Inventario de Señales Viales</string>
+    <string name="txt_departamento">Digite el Departamento</string>
+    <string name="txt_municipio">Digite el Municipio</string>
+    <string name="init_process">Comenzar</string>
+
+    <!-- Extra LBLS -->
+    <string name="select">Seleccione</string>
+    <string name="information">Información</string>
+    <string name="next">Siguiente</string>
+    <string name="save">Guardar</string>
+    <string name="exit">Salir</string>
+    <string name="todo">TODO</string>
+    <string name="pause">pause</string>
+    <string name="resume">resume</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,5 +1,15 @@
 <resources>
 
+    <!-- Button Stiles -->
+    <style name="CittisButton">
+        <item name="android:background">@drawable/button</item>
+        <item name="android:fontFamily">@font/texgyreadventorbold</item>
+        <item name="colorAccent">@color/color_text</item>
+        <item name="android:textColor">@color/color_text</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->

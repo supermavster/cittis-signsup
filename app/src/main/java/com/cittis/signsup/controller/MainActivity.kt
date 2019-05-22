@@ -17,14 +17,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-
     // Main Variables
     var mainActivity: Activity = this
     var maxID: String = ""
 
     // Exception
     var exceptionMain: Boolean = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

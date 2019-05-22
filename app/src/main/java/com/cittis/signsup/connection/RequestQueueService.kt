@@ -1,12 +1,13 @@
 package com.cittis.signsup.connection
 
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.view.Window
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
@@ -15,17 +16,18 @@ import com.android.volley.toolbox.Volley
 import com.cittis.signsup.R
 import java.util.*
 
+
 class RequestQueueService private constructor(context: Context) {
     private var mRequestQueue: RequestQueue? = null
 
     // getApplicationContext() is key, it keeps you from leaking the
     // Activity or BroadcastReceiver if someone passes one in.
-    val requestQueue: RequestQueue?
+    private val requestQueue: RequestQueue
         get() {
             if (mRequestQueue == null) {
-                mRequestQueue = Volley.newRequestQueue(mCtx.applicationContext)
+                mRequestQueue = Volley.newRequestQueue(mCtx!!.applicationContext)
             }
-            return mRequestQueue
+            return mRequestQueue!!
         }
 
     val requestHeader: Map<String, String>
@@ -36,12 +38,12 @@ class RequestQueueService private constructor(context: Context) {
         mRequestQueue = requestQueue
     }
 
-    fun <T> addToRequestQueue(req: Request<Any>?) {
-        req!!.retryPolicy = DefaultRetryPolicy(
+    fun <T> addToRequestQueue(req: Request<T>) {
+        req.retryPolicy = DefaultRetryPolicy(
             5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         )
-        requestQueue?.add(req)
+        requestQueue.add(req)
     }
 
     fun clearCache() {
@@ -54,7 +56,7 @@ class RequestQueueService private constructor(context: Context) {
 
     companion object {
         private var mInstance: RequestQueueService? = null
-        private lateinit var mCtx: Context
+        private var mCtx: Context? = null
         private var mProgressDialog: Dialog? = null
 
         @Synchronized
@@ -62,11 +64,11 @@ class RequestQueueService private constructor(context: Context) {
             if (mInstance == null) {
                 mInstance = RequestQueueService(context)
             }
-            return mInstance as RequestQueueService
+            return mInstance!!
         }
 
         //To show alert / error message
-        fun showAlert(message: String, context: Context) {
+        fun showAlert(message: String, context: FragmentActivity) {
             try {
                 val builder = AlertDialog.Builder(context)
                 builder.setTitle("Error!")
@@ -81,13 +83,13 @@ class RequestQueueService private constructor(context: Context) {
         }
 
         //Start showing progress
-        fun showProgressDialog(fragment: Fragment, context: Context) {
-            fragment.activity!!.runOnUiThread {
+        fun showProgressDialog(activity: Activity) {
+            activity.runOnUiThread {
                 if (mProgressDialog != null) {
                     if (mProgressDialog!!.isShowing == true) cancelProgressDialog()
                 }
 
-                mProgressDialog = Dialog(context)
+                mProgressDialog = Dialog(activity)
                 mProgressDialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
                 mProgressDialog!!.setContentView(R.layout.progress_indicator)
                 mProgressDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

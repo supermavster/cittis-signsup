@@ -10,13 +10,19 @@ import com.cittis.signsup.actions.FetchDataListener
 import org.json.JSONException
 import org.json.JSONObject
 
+
 class POSTAPIRequest {
     @Throws(JSONException::class)
     fun request(context: Context, listener: FetchDataListener?, params: JSONObject, ApiURL: String) {
         listener?.onFetchStart()
+        //base server URL
+        val baseUrl = "http://studypeek.com/test/"
+        //add extension api url received from caller
+        //and make full api
+        val url = baseUrl + ApiURL
         //Requesting with post body as params
         val postRequest = JsonObjectRequest(
-            Request.Method.POST, ApiURL, params,
+            Request.Method.POST, url, params,
             Response.Listener { response ->
                 try {
                     if (listener != null) {
@@ -42,7 +48,7 @@ class POSTAPIRequest {
                     val volley_error = VolleyError(String(error.networkResponse.data))
                     var errorMessage = ""
                     try {
-                        val errorJson = JSONObject(volley_error.message)
+                        val errorJson = JSONObject(volley_error.message.toString())
                         if (errorJson.has("error")) errorMessage = errorJson.getString("error")
                     } catch (e: JSONException) {
                         e.printStackTrace()
@@ -58,8 +64,9 @@ class POSTAPIRequest {
                 }
             })
 
-        RequestQueueService.getInstance(context)
-            .addToRequestQueue<Any>(postRequest.setShouldCache(false) as Request<Any>?)
+        RequestQueueService.getInstance(context).addToRequestQueue(postRequest.setShouldCache(false))
     }
 }
+
+
 

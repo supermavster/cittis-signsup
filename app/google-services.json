@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "818574073946",
+    "firebase_url": "https://cittis-tracking.firebaseio.com",
+    "project_id": "cittis-tracking",
+    "storage_bucket": "cittis-tracking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818574073946:android:db4275a5dba06f24",
+        "android_client_info": {
+          "package_name": "com.cittis.signsup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818574073946-u06kfu9fjhsa198e9fk6ooq4vc060ub6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cittis.signsup",
+            "certificate_hash": "34f05f6d37dad21fa30e085ec6927503739f5af3"
+          }
+        },
+        {
+          "client_id": "818574073946-lrm0bhmd9rr5v1s6c1ct5f2mn5huss2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cittis.signsup",
+            "certificate_hash": "f06cbb3c2d84526ebf6d904a4f39c91f29a80ebe"
+          }
+        },
+        {
+          "client_id": "818574073946-i5aaglhfqn1rj95s6u4eorli3b74cumj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKcl_k1IpIduo2mQGJe_gwzzamogxBgh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818574073946-i5aaglhfqn1rj95s6u4eorli3b74cumj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818574073946:android:7178ef9dc1ddd6da",
+        "android_client_info": {
+          "package_name": "com.cittis.tracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818574073946-hnih0ao5trb2iemge6hkkfnq2fa80r56.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cittis.tracking",
+            "certificate_hash": "34f05f6d37dad21fa30e085ec6927503739f5af3"
+          }
+        },
+        {
+          "client_id": "818574073946-i5aaglhfqn1rj95s6u4eorli3b74cumj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKcl_k1IpIduo2mQGJe_gwzzamogxBgh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818574073946-i5aaglhfqn1rj95s6u4eorli3b74cumj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818574073946:android:87fcb66cc6ca320a",
+        "android_client_info": {
+          "package_name": "com.google.firebase.quickstart.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818574073946-i5aaglhfqn1rj95s6u4eorli3b74cumj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKcl_k1IpIduo2mQGJe_gwzzamogxBgh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818574073946-i5aaglhfqn1rj95s6u4eorli3b74cumj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

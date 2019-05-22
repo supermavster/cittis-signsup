@@ -13,7 +13,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.navigation.Navigation
 import com.cittis.signsup.R
 import com.cittis.signsup.actions.ActionsRequest
@@ -63,6 +66,7 @@ class Login : Fragment() {
         return viewMain
     }
 
+
     private fun initProcess() {
         // [START config_signin]
         // Configure Google Sign In
@@ -81,14 +85,11 @@ class Login : Fragment() {
         // [END initialize_auth]
 
         // Actions
-        setCreateAccount()
-        setSignInGoogle()
         setSignIn()
         setSignOut()
         setSendEmailVerification()
 
     }
-
     // [START on_start_check_user]
     override fun onStart() {
         super.onStart()
@@ -97,53 +98,6 @@ class Login : Fragment() {
         updateUI(currentUser)
     }
 
-    private fun setCreateAccount() {
-        viewMain.findViewById<Button>(R.id.emailCreateAccountButton).setOnClickListener {
-            var email = viewMain.findViewById<EditText>(R.id.fieldEmail).text.toString()
-            var password = viewMain.findViewById<EditText>(R.id.fieldPassword).text.toString()
-            createAccount(email, password)
-        }
-    }
-
-    private fun createAccount(email: String, password: String) {
-        Log.d(TAG, "createAccount:$email")
-        if (!validateForm()) {
-            return
-        }
-
-        showProgressDialog()
-
-        // [START create_user_with_email]
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-            // .addOnCompleteListener(viewMain.context) { task ->
-            if (task.isSuccessful) {
-                // Sign in success, update UI with the signed-in user's information
-                Log.d(TAG, "createUserWithEmail:success")
-                val user = auth.currentUser
-                updateUI(user)
-            } else {
-                // If sign in fails, display a message to the user.
-                Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                Toast.makeText(
-                    viewMain.context, "Authentication failed.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                updateUI(null)
-            }
-
-            // [START_EXCLUDE]
-            hideProgressDialog()
-            // [END_EXCLUDE]
-        }
-        // [END create_user_with_email]
-    }
-
-    private fun setSignInGoogle() {
-        viewMain.findViewById<com.google.android.gms.common.SignInButton>(R.id.signInButton).setOnClickListener {
-            val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, ActionsRequest.RC_SIGN_IN)
-        }
-    }
 
 
     // [START onactivityresult]
@@ -242,7 +196,10 @@ class Login : Fragment() {
 
             // [START_EXCLUDE]
             if (!task.isSuccessful) {
-                viewMain.findViewById<TextView>(R.id.status).setText(R.string.auth_failed)
+                Toast.makeText(
+                    viewMain.context, R.string.auth_failed,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             hideProgressDialog()
             // [END_EXCLUDE]
@@ -252,12 +209,13 @@ class Login : Fragment() {
 
 
     private fun setSignOut() {
-        viewMain.findViewById<Button>(R.id.signOutButton).setOnClickListener {
+        /*viewMain.findViewById<Button>(R.id.signOutButton).setOnClickListener {
             signOut()
-        }
+        }*/
     }
 
     private fun signOut() {
+        // TODO: SALIR
         auth.signOut()
         updateUI(null)
         // Google sign out
@@ -267,14 +225,14 @@ class Login : Fragment() {
     }
 
     private fun setSendEmailVerification() {
-        viewMain.findViewById<Button>(R.id.verifyEmailButton).setOnClickListener {
+        /*viewMain.findViewById<Button>(R.id.verifyEmailButton).setOnClickListener {
             sendEmailVerification()
-        }
+        }*/
     }
 
     private fun sendEmailVerification() {
         // Disable button
-        viewMain.findViewById<Button>(R.id.verifyEmailButton).isEnabled = false
+        //viewMain.findViewById<Button>(R.id.verifyEmailButton).isEnabled = false
 
         // Send verification email
         // [START send_email_verification]
@@ -282,7 +240,7 @@ class Login : Fragment() {
         user?.sendEmailVerification()?.addOnCompleteListener { task ->
             // [START_EXCLUDE]
             // Re-enable button
-            viewMain.findViewById<Button>(R.id.verifyEmailButton).isEnabled = true
+            // viewMain.findViewById<Button>(R.id.verifyEmailButton).isEnabled = true
 
             if (task.isSuccessful) {
                 Toast.makeText(
@@ -308,29 +266,29 @@ class Login : Fragment() {
 
         hideProgressDialog()
         if (user != null) {
-            viewMain.findViewById<TextView>(R.id.status).text = getString(
+            /*viewMain.findViewById<TextView>(R.id.status).text = getString(
                 R.string.emailpassword_status_fmt,
                 user.email, user.isEmailVerified
-            )
-            viewMain.findViewById<TextView>(R.id.detail).text = getString(R.string.firebase_status_fmt, user.uid)
+            )*/
+            //viewMain.findViewById<TextView>(R.id.detail).text = getString(R.string.firebase_status_fmt, user.uid)
 
 
             viewMain.findViewById<LinearLayout>(R.id.emailPasswordButtons).visibility = View.GONE
-            viewMain.findViewById<LinearLayout>(R.id.emailPasswordFields).visibility = View.GONE
-            viewMain.findViewById<LinearLayout>(R.id.signedInButtons).visibility = View.VISIBLE
+            //viewMain.findViewById<LinearLayout>(R.id.emailPasswordFields).visibility = View.GONE
+            //viewMain.findViewById<LinearLayout>(R.id.signedInButtons).visibility = View.VISIBLE
 
-            viewMain.findViewById<Button>(R.id.verifyEmailButton).isEnabled = !user.isEmailVerified
+            //viewMain.findViewById<Button>(R.id.verifyEmailButton).isEnabled = !user.isEmailVerified
 
 
             // Check is Login and Verify
             checkLogin(user)
         } else {
-            viewMain.findViewById<TextView>(R.id.status).setText(R.string.signed_out)
-            viewMain.findViewById<TextView>(R.id.detail).text = null
+            //viewMain.findViewById<TextView>(R.id.status).setText(R.string.signed_out)
+            //viewMain.findViewById<TextView>(R.id.detail).text = null
 
             viewMain.findViewById<LinearLayout>(R.id.emailPasswordButtons).visibility = View.VISIBLE
-            viewMain.findViewById<LinearLayout>(R.id.emailPasswordFields).visibility = View.VISIBLE
-            viewMain.findViewById<LinearLayout>(R.id.signedInButtons).visibility = View.GONE
+            //viewMain.findViewById<LinearLayout>(R.id.emailPasswordFields).visibility = View.VISIBLE
+            //viewMain.findViewById<LinearLayout>(R.id.signedInButtons).visibility = View.GONE
         }
     }
 
@@ -358,6 +316,7 @@ class Login : Fragment() {
             startServiceTracking()
             // Init Action
             Navigation.findNavController(viewMain).navigate(R.id.municipalities, bundle)
+
         } else {
             Toast.makeText(
                 viewMain.context, "Please Verify Email.",

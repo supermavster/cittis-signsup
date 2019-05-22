@@ -9,4 +9,3 @@ interface FetchDataListener {
 
     fun onFetchStart()
 }
-

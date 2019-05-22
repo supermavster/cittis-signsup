@@ -1,12 +1,55 @@
-package com.cittis.signsup.connection
+package com.cittis.signsup
 
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import com.cittis.signsup.actions.FetchDataListener
+import com.cittis.signsup.connection.GETAPIRequest
+import com.cittis.signsup.connection.POSTAPIRequest
+import com.cittis.signsup.connection.RequestQueueService
+import org.json.JSONObject
+
 
 class TestAPIActivity : AppCompatActivity() {
-    /*
+
     private var resultTextView: TextView? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_test_api)
+
+        resultTextView = findViewById(R.id.resultTextView)
+
+        findViewById<Button>(R.id.getApiBtn).setOnClickListener {
+            getApiCall("http://192.168.0.14/app?departments=all&idFirebase=LJCpaE6xqmTOmtsKXJp6hnnya2d2")
+        }
+
+        findViewById<Button>(R.id.postApiBtn).setOnClickListener {
+            //postApiCall()
+        }
+
+    }
+
+    private fun getApiCall(url: String) {
+        try {
+            //Create Instance of GETAPIRequest and call it's
+            //request() method
+            val getapiRequest = GETAPIRequest()
+            //Attaching only part of URL as base URL is given
+            //in our GETAPIRequest(of course that need to be same for all case)
+            getapiRequest.request(this@TestAPIActivity, fetchGetResultListener, url)
+            Toast.makeText(this@TestAPIActivity, "GET API called", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
     //Implementing interfaces of FetchDataListener for GET api request
-    internal var fetchGetResultListener: FetchDataListener = object : FetchDataListener {
+    private var fetchGetResultListener: FetchDataListener = object : FetchDataListener {
         override fun onFetchComplete(data: JSONObject) {
             //Fetch Complete. Now stop progress bar  or loader
             //you started in onFetchStart
@@ -49,12 +92,33 @@ class TestAPIActivity : AppCompatActivity() {
             RequestQueueService.showProgressDialog(this@TestAPIActivity)
         }
     }
-    internal var getApiListener: View.OnClickListener = View.OnClickListener {
-        //Call getApiCall() method
-        getApiCall()
+
+    private fun postApiCall(url: String) {
+        try {
+            //Create Instance of POSTAPIRequest and call it's
+            //request() method
+            val postapiRequest = POSTAPIRequest()
+            //Attaching only part of URL as base URL is given
+            //in our POSTAPIRequest(of course that need to be same for all case)
+            val params = JSONObject()
+            try {
+                //Creating POST body in JSON format
+                //to send in POST request
+                params.put("userId", 2)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            postapiRequest.request(this@TestAPIActivity, fetchPostResultListener, params, url)
+            Toast.makeText(this@TestAPIActivity, "POST API called", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
+
     //Implementing interfaces of FetchDataListener for POST api request
-    internal var fetchPostResultListener: FetchDataListener = object : FetchDataListener {
+    private var fetchPostResultListener: FetchDataListener = object : FetchDataListener {
         override fun onFetchComplete(data: JSONObject) {
             //Fetch Complete. Now stop progress bar  or loader
             //you started in onFetchStart
@@ -97,66 +161,4 @@ class TestAPIActivity : AppCompatActivity() {
             RequestQueueService.showProgressDialog(this@TestAPIActivity)
         }
     }
-    internal var postApiListener: View.OnClickListener = View.OnClickListener {
-        //Call postApiCall() method
-        postApiCall()
-    }
-    private var getApiBtn: Button? = null
-    private var postApiBtn: Button? = null
-
-    private fun getApiCall() {
-        try {
-            //Create Instance of GETAPIRequest and call it's
-            //request() method
-            val getapiRequest = GETAPIRequest()
-            //Attaching only part of URL as base URL is given
-            //in our GETAPIRequest(of course that need to be same for all case)
-            val url = "webapi.php?userId=1"
-            getapiRequest.request(this@TestAPIActivity, fetchGetResultListener, url)
-            Toast.makeText(this@TestAPIActivity, "GET API called", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-    }
-
-    private fun postApiCall() {
-        try {
-            //Create Instance of POSTAPIRequest and call it's
-            //request() method
-            val postapiRequest = POSTAPIRequest()
-            //Attaching only part of URL as base URL is given
-            //in our POSTAPIRequest(of course that need to be same for all case)
-            val url = "webapi.php"
-            val params = JSONObject()
-            try {
-                //Creating POST body in JSON format
-                //to send in POST request
-                params.put("userId", 2)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            postapiRequest.request(this@TestAPIActivity, fetchPostResultListener, params, url)
-            Toast.makeText(this@TestAPIActivity, "POST API called", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test_api)
-        resultTextView = findViewById(R.id.resultTextView)
-        getApiBtn = findViewById(R.id.getApiBtn)
-        postApiBtn = findViewById(R.id.postApiBtn)
-
-        //Attaching OnClickListener with Buttons
-        getApiBtn!!.setOnClickListener(getApiListener)
-        postApiBtn!!.setOnClickListener(postApiListener)
-    }
-
-*/
 }
-
