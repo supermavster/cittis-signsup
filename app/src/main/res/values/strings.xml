@@ -39,6 +39,91 @@
     <string name="txt_municipio">Digite el Municipio</string>
     <string name="init_process">Comenzar</string>
 
+    <!-- Type Route -->
+    <string name="lbl_title_type_route">Tipo de Ruta</string>
+    <string name="btn_urban">Urbano</string>
+    <string name="btn_rural">Rural</string>
+
+    <!-- Type Signal -->
+    <string name="lbl_clasification_signal">Clasificación de la Señal</string>
+    <string name="btn_horizontal">Horizontal</string>
+    <string name="btn_vertical">Vertical</string>
+    <string name="btn_others">Otras</string>
+
+
+    <!-- Horizontal - Tipo de Señal Horizontal -->
+    <string name="lbl_type_horizontal_signal">Tipo de Señal Horizontal</string>
+    <string name="lbl_sense_traffic">Sentido del Trafico</string>
+    <string name="rbtn_unidirectional">Unidireccional</string>
+    <string name="rbtn_bidirectional">Bidireccional</string>
+
+    <string name="lbl_location_way">Ubicación en el Trayecto</string>
+    <string name="btn_stretch">Tramo</string>
+    <string name="btn_intersection">Intersección</string>
+
+    <string name="lbl_location_lane">Ubicación en Carril</string>
+    <string name="txt_location_signal">Carril de la señal</string>
+    <string name="txt_percentage_coverage">Porcentaje de Cobertura</string>
+
+    <!-- Vertical - Tipo de Señal Vertical -->
+    <string name="lbl_vertical_type_signal">Tipo de Señal Vertical</string>
+    <string name="btn_vertical_informative">Informativa</string>
+    <string name="btn_vertical_regulatory">Reglamentaria</string>
+    <string name="btn_vertical_preventive">Preventiva</string>
+    <string name="btn_vertical_work">Obra</string>
+    <string name="btn_vertical_cycle_route">Ciclo Ruta</string>
+
+    <!--// Vertical - Tipo Señal Vertical - Señal Informativa -->
+    <string name="lbl_vts_informative">Señal Informativa</string>
+    <string name="btn_vts_informative_location">Inf. de Localización</string>
+    <string name="btn_vts_informative_services">Inf. de Servicios</string>
+    <string name="btn_vts_informative_turist">Inf. de Turismo</string>
+
+    <!-- Sección 3: Datos Generales -->
+    <string name="tab_text_3">Datos Generales</string>
+
+    <string name="lbl_location_between_signal">La señal esta entre la:</string>
+    <string name="lbl_location_and_signal">Y la:</string>
+    <string name="lbl_location_with_signal">Con:</string>
+    <string name="lbl_number">#</string>
+    <string name="lbl_state_signal">Estado de la Señal:</string>
+    // Spinners
+    <string-array name="spinner_zip">
+        <item name="select">Seleccione</item>
+        <item name="spinner_zip_1">Carrera</item>
+        <item name="spinner_zip_2">Calle</item>
+        <item name="spinner_zip_3">Diagonal</item>
+        <item name="spinner_zip_4">Transversal</item>
+        <item name="spinner_zip_5">Avenida</item>
+    </string-array>
+
+    <!-- State Signal -->
+    <string name="lbl_size_signal">Tamaño de la Señal</string>
+    <string name="btn_60">60 x 60</string>
+    <string name="btn_75">75 x 75</string>
+    <string name="btn_90">90 x 90</string>
+    <string name="btn_120">120 x 120</string>
+
+    <string name="lbl_stay_signal">Fijación de la Señal</string>
+    <string name="btn_self_signal">Banderilla</string>
+    <string name="btn_light_signal">Poste de Luz</string>
+    <string name="btn_wall_signal">Pared</string>
+
+    <string name="lbl_state_stay_signal">Estado de la Fijación de la Señal</string>
+
+    <!-- GPS Signal -->
+    <string name="lbl_lat_lon">Captura de Latitud Y Longitud</string>
+    <string name="txt_latitude">Latitud</string>
+    <string name="txt_altitude">Altitud</string>
+    <string name="txt_longitude">Longitud</string>
+    <string name="btn_gps">Set GPS (Lat, Lon)</string>
+
+    <string name="lbl_photos_signal">Fotos de la señal</string>
+    <string name="photo_only">Foto</string>
+    <string name="photo_front">Frontal</string>
+    <string name="photo_back">Dorsal</string>
+    <string name="photo_plaque">Placa</string>
+
     <!-- Extra LBLS -->
     <string name="select">Seleccione</string>
     <string name="information">Información</string>

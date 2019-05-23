@@ -313,8 +313,7 @@ class Login : Fragment() {
 
 
             //** Id Project **/
-            var url = EndPoints.URL_GET_COUNT_INVENTORY(EndPoints.FireBaseID.toString())
-            Log.e("data", url)
+            var url = EndPoints.URL_GET_COUNT_INVENTORY(EndPoints.FireBaseID)
             getApiCall(url)
 
 
@@ -414,28 +413,10 @@ class Login : Fragment() {
                             val response = data.getJSONObject("response")
                             if (response != null) {
                                 //Display the result
-                                //Or, You can do whatever you need to
-                                //do with the JSONObject
                                 var array = response.toString(4)
                                 var tempValue = ConvertJSON(array)["data"]
-
-
-                                // Data - User
-                                var dataUser =
-                                    DataUser(userMain.email.toString(), userMain.uid, userMain.isEmailVerified.toInt())
-                                EndPoints.FireBasePath = dataUser.firebase_path
-
-
-                                // Make Object Main
-                                var cittisDB: CittisListSignal = CittisListSignal(tempValue as Int, dataUser, null)
-                                // Show Data
-                                Log.e("Data-Login", cittisDB.toString())
-                                // Set and Send Data Main
-                                bundle.putParcelable("CittisDB", cittisDB)
-                                // Start Tracking
-                                startServiceTracking()
-                                // Init Action
-                                Navigation.findNavController(viewMain).navigate(R.id.municipalities, bundle)
+                                // Init Process
+                                initProcessGet(tempValue)
                             }
                         } else {
                             RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
@@ -461,5 +442,24 @@ class Login : Fragment() {
             //Start showing progressbar or any loader you have
             RequestQueueService.showProgressDialog(fragment, viewMain.context)
         }
+    }
+
+    private fun initProcessGet(values: Any) {
+        // Data - User
+        var dataUser =
+            DataUser(userMain.email.toString(), EndPoints.FireBaseID, userMain.isEmailVerified.toInt())
+        EndPoints.FireBasePath = dataUser.firebase_path
+
+
+        // Make Object Main
+        var cittisDB: CittisListSignal = CittisListSignal(values as Int, dataUser, null)
+        // Show Data
+        Log.e("Data-Login", cittisDB.toString())
+        // Set and Send Data Main
+        bundle.putParcelable("CittisDB", cittisDB)
+        // Start Tracking
+        startServiceTracking()
+        // Init Action
+        Navigation.findNavController(viewMain).navigate(R.id.municipalities, bundle)
     }
 }

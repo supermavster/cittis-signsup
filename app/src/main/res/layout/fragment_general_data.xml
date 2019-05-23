@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        tools:context=".GeneralData">
+    <TextView
+            android:text="@string/lbl_type_horizontal_signal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_type_horizontal_signal" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" style="@style/CittisText"/>
+    <TextView
+            android:text="@string/lbl_sense_traffic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_sense_traffic" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp" app:layout_constraintTop_toTopOf="parent"
+            android:textAlignment="center" android:focusable="true" android:focusableInTouchMode="true"
+            app:layout_constraintHorizontal_bias="0.498"/>
+    <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_sense_traffic" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" android:id="@+id/rg_directional">
+        <RadioButton
+                android:text="@string/rbtn_unidirectional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/rbtn_unidirectional" android:layout_weight="1"/>
+        <RadioButton
+                android:text="@string/rbtn_bidirectional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/rbtn_bidirectional" android:layout_weight="1"
+                android:textAlignment="center"/>
+    </RadioGroup>
+    <View
+            android:id="@+id/divider8"
+            android:layout_width="379dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/rg_directional" android:layout_marginTop="8dp"/>
+    <TextView
+            android:text="@string/lbl_location_lane"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_location_lane"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" app:layout_constraintTop_toBottomOf="@+id/divider8"
+            android:layout_marginTop="8dp" android:textAlignment="center"/>
+
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_location_lane" android:id="@+id/linearLayout5"
+            android:clickable="false">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:gravity="center|center_horizontal|center_vertical"
+                android:layout_marginRight="10dp" android:clickable="false">
+            <TextView
+                    android:text="@string/txt_percentage_coverage"
+                    android:layout_height="40dp" android:id="@+id/lbl_percentage"
+                    android:layout_width="match_parent" android:textAlignment="center" android:gravity="center"/>
+            <NumberPicker
+                    android:focusable="false"
+                    android:focusedByDefault="false"
+                    android:id="@+id/txt_percentage_coverage" android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:hint="@string/txt_location_signal"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/lbl_location_lane"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true" android:focusableInTouchMode="false"
+
+
+                    android:clickable="false"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:gravity="center|center_horizontal|center_vertical"
+                android:layout_marginLeft="10dp">
+            <TextView
+                    android:text="@string/txt_location_signal"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp" android:id="@+id/lbl_location"
+                    android:textAlignment="center" android:gravity="center"/>
+            <NumberPicker
+                    tools:targetApi="o"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:focusedByDefault="false"
+                    android:focusableInTouchMode="false"
+                    android:id="@+id/txt_location_signal" android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:hint="@string/txt_location_signal"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/lbl_location_lane"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+
+            />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+            android:text="@string/lbl_state_signal"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:id="@+id/lbl_state_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"/>
+    <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_state_horizontal"
+            app:layout_constraintVertical_bias="0.032" android:rating="0" android:numStars="3"
+            app:layout_constraintHorizontal_bias="0.497"/>
+
+    <Button
+            android:text="@string/next"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_next_general_data"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" app:layout_constraintHorizontal_bias="0.498"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" style="@style/CittisButton"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -19,6 +19,8 @@
     </fragment>
     <fragment android:id="@+id/typeRoad" android:name="com.cittis.signsup.view.TypeRoad"
               android:label="fragment_type_road" tools:layout="@layout/fragment_type_road"/>
+    <fragment android:id="@+id/testAPIActivity" android:name="com.cittis.signsup.TestAPIActivity"
+              android:label="TestAPIActivity"/>
 
 
 </navigation>

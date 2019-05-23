@@ -71,30 +71,9 @@ class Municipalities : Fragment() {
         }
     }
 
-    private fun initProcesss() {
-        /** TODO: TRACKING (ALL Users)
-        viewMain.findViewById<Button>(R.id.btnNotify).setOnClickListener {
-        val intent = Intent(viewMain.context, DisplayActivity::class.java)
-        // start your next activity
-        startActivity(intent)
-        }*/
-    }
-
 
     private fun initProcess() {
 
-        /* TODO: END PROCESS/ Get Max Inventario
-        if (idProject.isEmpty()) {
-
-        }
-        data.add(idProject) // 0 -> Id Inventario
-        // Get Max Signal
-        if (maxSignal.isEmpty()) {
-            var url = EndPoints.URL_GET_MAX_SIGNAL(login.firebase_id.toString())
-            Log.e("data",url)
-            //getApiCall(url, "maxSignal");
-        }
-        data.add(maxSignal) // 1 -> Id Lista Senal*/
 
         //Attaching only part of URL as base URL is given
         //in our GETAPIRequest(of course that need to be same for all case)
@@ -103,7 +82,7 @@ class Municipalities : Fragment() {
         viewMain.findViewById<Button>(R.id.buttonMain).isEnabled = false
 
 
-        var url = EndPoints.URL_GET_DEPARTMENTS_BY_IDFIREBASE("all", login.firebase_id.toString())
+        var url = EndPoints.URL_GET_DEPARTMENTS_BY_IDFIREBASE("all", EndPoints.FireBaseID)
         getApiCall(url, "departments")
         viewMain.findViewById<Button>(R.id.buttonMain).setOnClickListener { view ->
 
@@ -164,6 +143,12 @@ class Municipalities : Fragment() {
 
     //Implementing interfaces of FetchDataListener for GET api request
     private var fetchGetResultListener: FetchDataListener = object : FetchDataListener {
+
+        override fun onFetchStart() {
+            //Start showing progressbar or any loader you have
+            RequestQueueService.showProgressDialog(fragment, viewMain.context)
+        }
+
         override fun onFetchComplete(data: JSONObject) {
             //Fetch Complete. Now stop progress bar  or loader
             //you started in onFetchStart
@@ -177,25 +162,11 @@ class Municipalities : Fragment() {
                             val response = data.getJSONObject("response")
                             if (response != null) {
                                 //Display the result
-                                //Or, You can do whatever you need to
-                                //do with the JSONObject
+                                //Or, You can do whatever you need to do with the JSONObject
                                 var array = response.toString(4)
                                 var tempValue = ConvertJSON(array)["data"]
-
-                                var id = when (idObject) {
-                                    "departments" -> R.id.auto_complete_departamento
-                                    "municipalities" -> R.id.auto_complete_municipio
-                                    else -> 0
-
-                                }
-
-                                var arrayTemp = JsonUtil2.getStringListFromJsonArray(tempValue as JSONArray)
-                                // Make Elements
-                                makeAutocomplete(
-                                    arrayTemp as ArrayList<String>,
-                                    viewMain.findViewById<AutoCompleteTextView>(id)
-                                )
-
+                                // Init Process
+                                initProcessGet(tempValue)
                             }
                         } else {
                             RequestQueueService.showAlert(
@@ -221,10 +192,25 @@ class Municipalities : Fragment() {
             RequestQueueService.showAlert(msg, viewMain.context)
         }
 
-        override fun onFetchStart() {
-            //Start showing progressbar or any loader you have
-            RequestQueueService.showProgressDialog(fragment, viewMain.context)
+
+    }
+
+
+    private fun initProcessGet(values: Any) {
+
+        var id = when (idObject) {
+            "departments" -> R.id.auto_complete_departamento
+            "municipalities" -> R.id.auto_complete_municipio
+            else -> 0
+
         }
+
+        var arrayTemp = JsonUtil2.getStringListFromJsonArray(values as JSONArray)
+        // Make Elements
+        makeAutocomplete(
+            arrayTemp as ArrayList<String>,
+            viewMain.findViewById<AutoCompleteTextView>(id)
+        )
     }
 
     /**  */
@@ -257,7 +243,7 @@ class Municipalities : Fragment() {
                     viewMain.findViewById<AutoCompleteTextView>(R.id.auto_complete_municipio).isEnabled = true
                     viewMain.findViewById<Button>(R.id.buttonMain).isEnabled = true
                     // Add Actionsion(position).toString()
-                    val url = EndPoints.URL_GET_MUNICIPALITIES_BY_IDFIREBASE(selectedItem, login.firebase_id.toString())
+                    val url = EndPoints.URL_GET_MUNICIPALITIES_BY_IDFIREBASE(selectedItem, EndPoints.FireBaseID)
                     //Log.e("Data", url)
                     getApiCall(url, "municipalities")
                     //Toast.makeText(context,"Selected : $selectedItem", Toast.LENGTH_SHORT).show()
