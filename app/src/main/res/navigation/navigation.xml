@@ -18,9 +18,74 @@
         <action android:id="@+id/action_municipalities_to_typeRoad" app:destination="@id/typeRoad"/>
     </fragment>
     <fragment android:id="@+id/typeRoad" android:name="com.cittis.signsup.view.TypeRoad"
-              android:label="fragment_type_road" tools:layout="@layout/fragment_type_road"/>
+              android:label="fragment_type_road" tools:layout="@layout/fragment_type_road">
+        <action android:id="@+id/action_typeRoad_to_typeSignal" app:destination="@id/typeSignal"/>
+        <action android:id="@+id/action_typeRoad_to_geolocalization" app:destination="@id/geolocalization"/>
+    </fragment>
     <fragment android:id="@+id/testAPIActivity" android:name="com.cittis.signsup.TestAPIActivity"
               android:label="TestAPIActivity"/>
+    <fragment android:id="@+id/typeSignal" android:name="com.cittis.signsup.TypeSignal"
+              android:label="fragment_type_signal" tools:layout="@layout/fragment_type_signal">
+        <action android:id="@+id/action_typeSignal_to_verticalSignal" app:destination="@id/verticalSignal"/>
+        <action android:id="@+id/action_typeSignal_to_horizontalSignal" app:destination="@id/horizontalSignal"/>
+    </fragment>
+    <fragment android:id="@+id/horizontalSignal" android:name="com.cittis.signsup.HorizontalSignal"
+              android:label="fragment_horizontal_signal" tools:layout="@layout/fragment_horizontal_signal">
+        <action android:id="@+id/action_horizontalSignal_to_mainImage" app:destination="@id/mainImage"/>
+    </fragment>
+    <fragment android:id="@+id/verticalSignal" android:name="com.cittis.signsup.VerticalSignal"
+              android:label="fragment_vertical_signal" tools:layout="@layout/fragment_vertical_signal">
+        <action android:id="@+id/action_verticalSignal_to_verticalInformativeSignal"
+                app:destination="@id/verticalInformativeSignal"/>
+        <action android:id="@+id/action_verticalSignal_to_mainImage" app:destination="@id/mainImage"/>
+    </fragment>
+    <fragment android:id="@+id/verticalInformativeSignal" android:name="com.cittis.signsup.VerticalInformativeSignal"
+              android:label="fragment_vertical_informative_signal"
+              tools:layout="@layout/fragment_vertical_informative_signal">
+        <action android:id="@+id/action_verticalInformativeSignal_to_mainImage" app:destination="@id/mainImage"/>
+    </fragment>
+    <fragment android:id="@+id/mainImage" android:name="com.cittis.signsup.MainImage"
+              android:label="fragment_main_image" tools:layout="@layout/fragment_main_image">
+        <action android:id="@+id/action_mainImage_to_adressLocation" app:destination="@id/adressLocation"/>
+        <action android:id="@+id/action_mainImage_to_variableSignal" app:destination="@id/variableSignal"/>
+    </fragment>
+    <fragment android:id="@+id/adressLocation" android:name="com.cittis.signsup.AdressLocation"
+              android:label="fragment_adress_location" tools:layout="@layout/fragment_address_location">
+        <action android:id="@+id/action_adressLocation_to_generalData" app:destination="@id/generalData"/>
+        <action android:id="@+id/action_adressLocation_to_stateSignal" app:destination="@id/stateSignal"/>
+    </fragment>
+    <fragment android:id="@+id/generalData" android:name="com.cittis.signsup.GeneralData"
+              android:label="fragment_general_data" tools:layout="@layout/fragment_general_data">
+        <action android:id="@+id/action_generalData_to_photosGps" app:destination="@id/photosGps"/>
+    </fragment>
+    <fragment android:id="@+id/stateSignal" android:name="com.cittis.signsup.StateSignal"
+              android:label="fragment_state_signal" tools:layout="@layout/fragment_state_signal">
+        <action android:id="@+id/action_stateSignal_to_statePost" app:destination="@id/statePost"/>
+    </fragment>
+    <fragment android:id="@+id/statePost" android:name="com.cittis.signsup.StatePost"
+              android:label="fragment_state_post" tools:layout="@layout/fragment_state_post">
+        <action android:id="@+id/action_statePost_to_signalFlow" app:destination="@id/signalFlow"/>
+    </fragment>
+    <fragment android:id="@+id/photosGps" android:name="com.cittis.signsup.PhotosGps"
+              android:label="fragment_photos_gps" tools:layout="@layout/fragment_photos_gps">
+        <action android:id="@+id/action_photosGps_to_finish" app:destination="@id/finish"/>
+    </fragment>
+    <fragment android:id="@+id/geolocalization" android:name="com.cittis.signsup.Geolocalization"
+              android:label="fragment_geolocalization" tools:layout="@layout/fragment_geolocation">
+        <action android:id="@+id/action_geolocalization_to_typeSignal" app:destination="@id/typeSignal"/>
+    </fragment>
+    <fragment android:id="@+id/variableSignal" android:name="com.cittis.signsup.VariableSignal"
+              android:label="fragment_variable_signal" tools:layout="@layout/fragment_variable_signal">
+        <action android:id="@+id/action_variableSignal_to_adressLocation" app:destination="@id/adressLocation"/>
+    </fragment>
+    <fragment android:id="@+id/signalFlow" android:name="com.cittis.signsup.SignalFlow"
+              android:label="fragment_signal_flow" tools:layout="@layout/fragment_signal_flow">
+        <action android:id="@+id/action_signalFlow_to_photosGps" app:destination="@id/photosGps"/>
+    </fragment>
+    <fragment android:id="@+id/finish" android:name="com.cittis.signsup.Finish" android:label="fragment_finish"
+              tools:layout="@layout/fragment_finish">
+        <action android:id="@+id/action_finish_to_typeRoad" app:destination="@id/typeRoad"/>
+    </fragment>
 
 
 </navigation>
