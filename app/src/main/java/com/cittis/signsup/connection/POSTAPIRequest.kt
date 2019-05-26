@@ -14,7 +14,8 @@ class POSTAPIRequest {
     fun request(context: Context, listener: FetchDataListener?, parameters: HashMap<String, String>, ApiURL: String) {
         listener?.onFetchStart()
 
-        val stringRequest = object : StringRequest(Request.Method.POST, ApiURL,
+        val postRequest = object : StringRequest(
+            Request.Method.POST, ApiURL,
             Response.Listener<String> { obj ->
                 try {
                     val response = JSONObject(obj)
@@ -43,9 +44,8 @@ class POSTAPIRequest {
                     val volley_error = VolleyError(String(error.networkResponse.data))
                     var errorMessage = ""
                     try {
-                        Log.e("da", volley_error.toString())
-                        //val errorJson = JSONObject(volley_error.message.toString())
-                        //if (errorJson.has("error")) errorMessage = errorJson.getString("error")
+                        val errorJson = JSONObject(volley_error.message.toString())
+                        if (errorJson.has("error")) errorMessage = errorJson.getString("error")
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
@@ -65,16 +65,23 @@ class POSTAPIRequest {
             }
 
         }
-        Log.i("Make", stringRequest.toString())
-        // Volley request policy, only one time request to avoid duplicate transaction
+        Log.i("Make", postRequest.toString())
+
+        postRequest.setShouldCache(false)
+        postRequest.retryPolicy = DefaultRetryPolicy(
+            DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,//TIMEOUT,
+            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        )
+
+        /*/ Volley request policy, only one time request to avoid duplicate transaction
         stringRequest.retryPolicy = DefaultRetryPolicy(
-            DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
-            // 0 means no retry
+            DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, // 0 means no retry
             0, // DefaultRetryPolicy.DEFAULT_MAX_RETRIES = 2
             1f // DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-        )
+        )*/
         //adding request to queue
-        RequestQueueService.getInstance(context).addToRequestQueue(stringRequest)
+        RequestQueueService.getInstance(context).addToRequestQueue(postRequest.setShouldCache(false))
     }
 }
 

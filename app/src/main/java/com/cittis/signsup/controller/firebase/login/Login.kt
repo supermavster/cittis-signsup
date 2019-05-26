@@ -314,6 +314,7 @@ class Login : Fragment() {
 
 
             var url = EndPoints.URL_CHECK_USER(EndPoints.FireBaseID)
+            Log.e("Url-1", url)
             getApiCall(url, "checkUser")
 
 
@@ -420,7 +421,14 @@ class Login : Fragment() {
                             initProcessGet(tempValue)
                         }
                     } else {
-                        RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
+                        val response = data.getJSONObject("response")
+                        if (response != null) {
+                            Log.e("Error", response.toString(4))
+                            val error = response.getString("error")
+                            RequestQueueService.showAlert(error, viewMain.context)
+                        } else {
+                            RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
+                        }
                     }
                 }
             } catch (e: Exception) {
@@ -454,10 +462,12 @@ class Login : Fragment() {
                 if (values == "1") {
                     //** Id Project **/
                     var url = EndPoints.URL_GET_COUNT_INVENTORY(EndPoints.FireBaseID)
+                    Log.e("url-2", url)
                     getApiCall(url, "count")
                 } else {
                     //** Id Project **/
                     var url = EndPoints.URL_POST_ADD_FIREBASE_USER(EndPoints.FireBaseID)
+                    Log.e("url-3", url)
                     postApiCall(url, dataUser)
                 }
             }
@@ -502,7 +512,7 @@ class Login : Fragment() {
                 e.printStackTrace()
             }
             postApiRequest.request(viewMain.context, fetchPostResultListener, params, url)
-            Toast.makeText(viewMain.context, "POST API called", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(viewMain.context, "POST API called", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -527,10 +537,17 @@ class Login : Fragment() {
                             //Or, You can do whatever you need to
                             //do with the JSONObject
                             Log.e("Data", response.toString(4))
-                            //if(response.getString("data")=="Complete") { }
+                            //if(response.getString("data")=="c                                                                                                                                                         {") { }
                         }
                     } else {
-                        RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
+                        val response = data.getJSONObject("response")
+                        if (response != null) {
+                            Log.e("Error", response.toString(4))
+                            val error = response.getString("error")
+                            RequestQueueService.showAlert(error, viewMain.context)
+                        } else {
+                            RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
+                        }
                     }
                 }
             } catch (e: Exception) {
