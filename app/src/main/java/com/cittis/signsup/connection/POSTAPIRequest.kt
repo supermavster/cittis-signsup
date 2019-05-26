@@ -1,11 +1,9 @@
 package com.cittis.signsup.connection
 
 import android.content.Context
-import com.android.volley.NoConnectionError
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonObjectRequest
+import android.util.Log
+import com.android.volley.*
+import com.android.volley.toolbox.StringRequest
 import com.cittis.signsup.actions.FetchDataListener
 import org.json.JSONException
 import org.json.JSONObject
@@ -13,18 +11,14 @@ import org.json.JSONObject
 
 class POSTAPIRequest {
     @Throws(JSONException::class)
-    fun request(context: Context, listener: FetchDataListener?, params: JSONObject, ApiURL: String) {
+    fun request(context: Context, listener: FetchDataListener?, parameters: HashMap<String, String>, ApiURL: String) {
         listener?.onFetchStart()
-        //base server URL
-        val baseUrl = "http://studypeek.com/test/"
-        //add extension api url received from caller
-        //and make full api
-        val url = baseUrl + ApiURL
-        //Requesting with post body as params
-        val postRequest = JsonObjectRequest(
-            Request.Method.POST, url, params,
-            Response.Listener { response ->
+
+        val stringRequest = object : StringRequest(Request.Method.POST, ApiURL,
+            Response.Listener<String> { obj ->
                 try {
+                    val response = JSONObject(obj)
+                    //Log.e("response", response.toString())
                     if (listener != null) {
                         if (response.has("response")) {
                             //received response
@@ -41,15 +35,17 @@ class POSTAPIRequest {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
-            }, Response.ErrorListener { error ->
+            },
+            Response.ErrorListener { error ->
                 if (error is NoConnectionError) {
                     listener!!.onFetchFailure("Network Connectivity Problem")
                 } else if (error.networkResponse != null && error.networkResponse.data != null) {
                     val volley_error = VolleyError(String(error.networkResponse.data))
                     var errorMessage = ""
                     try {
-                        val errorJson = JSONObject(volley_error.message.toString())
-                        if (errorJson.has("error")) errorMessage = errorJson.getString("error")
+                        Log.e("da", volley_error.toString())
+                        //val errorJson = JSONObject(volley_error.message.toString())
+                        //if (errorJson.has("error")) errorMessage = errorJson.getString("error")
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
@@ -62,9 +58,23 @@ class POSTAPIRequest {
                 } else {
                     listener!!.onFetchFailure("Something went wrong. Please try again later")
                 }
-            })
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                return parameters
+            }
 
-        RequestQueueService.getInstance(context).addToRequestQueue(postRequest.setShouldCache(false))
+        }
+        Log.i("Make", stringRequest.toString())
+        // Volley request policy, only one time request to avoid duplicate transaction
+        stringRequest.retryPolicy = DefaultRetryPolicy(
+            DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+            // 0 means no retry
+            0, // DefaultRetryPolicy.DEFAULT_MAX_RETRIES = 2
+            1f // DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        )
+        //adding request to queue
+        RequestQueueService.getInstance(context).addToRequestQueue(stringRequest)
     }
 }
 

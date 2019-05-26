@@ -10,13 +10,27 @@ object EndPoints {
 
     /** Server **/
     // Server Main 172.20.1.14 172.20.1.19 192.168.43.137 172.20.1.13
-    private const val SERVER_MAIN = "cittis.com.co"//""ivs.cittis.com.co"
+    private const val SERVER_MAIN = "signsup.cittis.com.co"//""ivs.cittis.com.co"
     private const val PATH_SOURCE = "http://$SERVER_MAIN/"
     private const val PATH_API = "${PATH_SOURCE}app?"
     private const val PATH_MAIN = "${PATH_SOURCE}controller/isv/"
 
+    /** Post Firebase User **/
+    private const val URL_POST_ADD_FIREBASE_USER = "${PATH_API}add=firebase"
+
+    fun URL_POST_ADD_FIREBASE_USER(idUserFirebase: String): String {
+        return "$URL_POST_ADD_FIREBASE_USER&idUserFirebase=$idUserFirebase"//1
+    }
+
+
+
     /** Check Login */
     const val URL_CHECK_SIGNIN = "${PATH_SOURCE}plugins/login/signin.php"
+
+    private const val URL_CHECK_USER = "${PATH_API}checkUser=true"
+    fun URL_CHECK_USER(idUserFirebase: String): String {
+        return "$URL_CHECK_USER&idUserFirebase=$idUserFirebase"//1
+    }
 
     /** Get Components */
     // Get All Municipalities

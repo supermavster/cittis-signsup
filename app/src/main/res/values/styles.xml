@@ -3,7 +3,7 @@
     <!-- Button Stiles -->
     <style name="CittisButton">
         <item name="android:background">@drawable/button</item>
-        <item name="android:fontFamily">@font/texgyreadventorbold</item>
+        <!--<item name="android:fontFamily">@font/texgyreadventorbold</item>-->
         <item name="colorAccent">@color/color_text</item>
         <item name="android:textColor">@color/color_text</item>
         <item name="android:focusable">true</item>
@@ -13,7 +13,7 @@
     <style name="CittisText">
         <item name="android:textSize">30sp</item>>
         <item name="android:textColor">@color/color_text</item>
-        <item name="android:fontFamily">@font/texgyreadventorbold"</item>
+        <!--<item name="android:fontFamily">@font/texgyreadventorbold"</item>-->
     </style>
 
     <!-- Base application theme. -->

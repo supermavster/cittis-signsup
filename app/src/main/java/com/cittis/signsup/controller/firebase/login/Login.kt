@@ -24,6 +24,7 @@ import com.cittis.signsup.actions.EndPoints
 import com.cittis.signsup.actions.FetchDataListener
 import com.cittis.signsup.connection.DataBase
 import com.cittis.signsup.connection.GETAPIRequest
+import com.cittis.signsup.connection.POSTAPIRequest
 import com.cittis.signsup.connection.RequestQueueService
 import com.cittis.signsup.controller.firebase.tracking.TrackerService
 import com.cittis.signsup.controller.plugins.ConvertJSON
@@ -97,6 +98,7 @@ class Login : Fragment() {
         setSendEmailVerification()
 
     }
+
     // [START on_start_check_user]
     override fun onStart() {
         super.onStart()
@@ -104,7 +106,6 @@ class Login : Fragment() {
         val currentUser = auth.currentUser
         updateUI(currentUser)
     }
-
 
 
     // [START onactivityresult]
@@ -312,9 +313,8 @@ class Login : Fragment() {
             EndPoints.FireBaseID = userMain.uid
 
 
-            //** Id Project **/
-            var url = EndPoints.URL_GET_COUNT_INVENTORY(EndPoints.FireBaseID)
-            getApiCall(url)
+            var url = EndPoints.URL_CHECK_USER(EndPoints.FireBaseID)
+            getApiCall(url, "checkUser")
 
 
         } else {
@@ -382,8 +382,10 @@ class Login : Fragment() {
 
     fun Boolean.toInt() = if (this) 1 else 0
 
+    var option = ""
     /** GET API */
-    private fun getApiCall(url: String) {
+    private fun getApiCall(url: String, option: String) {
+        this.option = option
         try {
             //Create Instance of GETAPIRequest and call it's
             //request() method
@@ -406,24 +408,20 @@ class Login : Fragment() {
             RequestQueueService.cancelProgressDialog()
             try {
                 //Now check result sent by our GETAPIRequest class
-                if (data != null) {
-                    if (data.has("success")) {
-                        val success = data.getInt("success")
-                        if (success == 1) {
-                            val response = data.getJSONObject("response")
-                            if (response != null) {
-                                //Display the result
-                                var array = response.toString(4)
-                                var tempValue = ConvertJSON(array)["data"]
-                                // Init Process
-                                initProcessGet(tempValue)
-                            }
-                        } else {
-                            RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
+                if (data.has("success")) {
+                    val success = data.getInt("success")
+                    if (success == 1) {
+                        val response = data.getJSONObject("response")
+                        if (response != null) {
+                            //Display the result
+                            var array = response.toString(4)
+                            var tempValue = ConvertJSON(array)["data"]
+                            // Init Process
+                            initProcessGet(tempValue)
                         }
+                    } else {
+                        RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
                     }
-                } else {
-                    RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
                 }
             } catch (e: Exception) {
                 RequestQueueService.showAlert("Something went wrong", viewMain.context)
@@ -444,22 +442,114 @@ class Login : Fragment() {
         }
     }
 
+    var check = false
+
     private fun initProcessGet(values: Any) {
         // Data - User
         var dataUser =
             DataUser(userMain.email.toString(), EndPoints.FireBaseID, userMain.isEmailVerified.toInt())
-        EndPoints.FireBasePath = dataUser.firebase_path
 
+        when (option) {
+            "checkUser" -> {
+                if (values == "1") {
+                    //** Id Project **/
+                    var url = EndPoints.URL_GET_COUNT_INVENTORY(EndPoints.FireBaseID)
+                    getApiCall(url, "count")
+                } else {
+                    //** Id Project **/
+                    var url = EndPoints.URL_POST_ADD_FIREBASE_USER(EndPoints.FireBaseID)
+                    postApiCall(url, dataUser)
+                }
+            }
+            "count" -> {
 
-        // Make Object Main
-        var cittisDB: CittisListSignal = CittisListSignal(values as Int, dataUser, null)
-        // Show Data
-        Log.e("Data-Login", cittisDB.toString())
-        // Set and Send Data Main
-        bundle.putParcelable("CittisDB", cittisDB)
-        // Start Tracking
-        startServiceTracking()
-        // Init Action
-        Navigation.findNavController(viewMain).navigate(R.id.municipalities, bundle)
+                EndPoints.FireBasePath = dataUser.firebase_path
+
+                // Make Object Main
+                var cittisDB: CittisListSignal = CittisListSignal(values as Int, dataUser, null)
+                // Show Data
+                Log.e("Data-Login", cittisDB.toString())
+                // Set and Send Data Main
+                bundle.putParcelable("CittisDB", cittisDB)
+                // Start Tracking
+                startServiceTracking()
+                // Init Action
+                Navigation.findNavController(viewMain).navigate(R.id.municipalities, bundle)
+            }
+            else -> {
+                Log.e("Error", option)
+
+            }
+        }
+
     }
+
+    /** Post Elements **/
+    private fun postApiCall(url: String, data: DataUser) {
+        try {
+            //Create Instance of POSTAPIRequest and call it's
+            //request() method
+            val postApiRequest = POSTAPIRequest()
+            //Attaching only part of URL as base URL is given
+            //in our POSTAPIRequest(of course that need to be same for all case)
+
+            var params = HashMap<String, String>()
+            try {
+                //Creating POST body in JSON format
+                //to send in POST request
+                params.put("data", data.getData())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            postApiRequest.request(viewMain.context, fetchPostResultListener, params, url)
+            Toast.makeText(viewMain.context, "POST API called", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    //Implementing interfaces of FetchDataListener for POST api request
+    private var fetchPostResultListener: FetchDataListener = object : FetchDataListener {
+        override fun onFetchComplete(data: JSONObject) {
+
+            //Fetch Complete. Now stop progress bar  or loader
+            //you started in onFetchStart
+            RequestQueueService.cancelProgressDialog()
+            try {
+                //Now check result sent by our POSTAPIRequest class
+                if (data.has("success")) {
+                    val success = data.getInt("success")
+                    if (success == 1) {
+                        val response = data.getJSONObject("response")
+                        if (response != null) {
+                            //Display the result
+                            //Or, You can do whatever you need to
+                            //do with the JSONObject
+                            Log.e("Data", response.toString(4))
+                            //if(response.getString("data")=="Complete") { }
+                        }
+                    } else {
+                        RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
+                    }
+                }
+            } catch (e: Exception) {
+                RequestQueueService.showAlert("Something went wrong", viewMain.context)
+                e.printStackTrace()
+            }
+
+        }
+
+        override fun onFetchFailure(msg: String) {
+            RequestQueueService.cancelProgressDialog()
+            //Show if any error message is there called from POSTAPIRequest class
+            RequestQueueService.showAlert(msg, viewMain.context)
+        }
+
+        override fun onFetchStart() {
+            //Start showing progressbar or any loader you have
+            RequestQueueService.showProgressDialog(fragment, viewMain.context)
+        }
+    }
+
 }

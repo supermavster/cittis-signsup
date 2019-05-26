@@ -110,11 +110,12 @@ class TestAPIActivity : Fragment() {
             val postapiRequest = POSTAPIRequest()
             //Attaching only part of URL as base URL is given
             //in our POSTAPIRequest(of course that need to be same for all case)
-            val params = JSONObject()
+            var params = HashMap<String, String>()
+
             try {
                 //Creating POST body in JSON format
                 //to send in POST request
-                params.put("userId", 2)
+                params.put("userId", "2")
             } catch (e: Exception) {
                 e.printStackTrace()
             }

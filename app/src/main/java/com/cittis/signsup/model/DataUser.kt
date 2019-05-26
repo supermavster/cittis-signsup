@@ -45,4 +45,8 @@ data class DataUser(
         return "\"DataUser\":{\"firebase_email\":\"$firebase_email\", \"firebase_id\":\"$firebase_id\", \"firebase_auth\":$firebase_auth, \"firebase_path\":\"$firebase_path\"}"
     }
 
+
+    fun getData(): String {
+        return "{" + toString() + "}"
+    }
 }
