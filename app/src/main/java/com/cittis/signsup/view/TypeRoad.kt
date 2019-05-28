@@ -2,10 +2,12 @@ package com.cittis.signsup.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.Button
+import androidx.navigation.Navigation
 import com.cittis.signsup.R
 import com.cittis.signsup.actions.EndPoints
 import com.cittis.signsup.actions.FetchDataListener
@@ -13,6 +15,7 @@ import com.cittis.signsup.connection.GETAPIRequest
 import com.cittis.signsup.connection.RequestQueueService
 import com.cittis.signsup.controller.plugins.ConvertJSON
 import com.cittis.signsup.model.CittisListSignal
+import com.cittis.signsup.model.CittisSignsUp
 import com.cittis.signsup.model.DataUser
 import org.json.JSONObject
 
@@ -22,7 +25,6 @@ class TypeRoad : Fragment() {
     // Main Variables
     private var fragment = this
     private lateinit var viewMain: View
-    // private lateinit var dataBase: DataBase
 
     // Make Bundle
     val bundle = Bundle()
@@ -30,6 +32,8 @@ class TypeRoad : Fragment() {
 
     // Data Base
     private lateinit var cittisDB: CittisListSignal
+    private var signalArrayList = ArrayList<CittisSignsUp>()
+
     private var maxSignal = 0
 
     override fun onCreateView(
@@ -37,8 +41,6 @@ class TypeRoad : Fragment() {
     ): View? {
         // Init View
         viewMain = inflater.inflate(R.layout.fragment_type_road, container, false)
-
-
         return viewMain
     }
 
@@ -51,6 +53,9 @@ class TypeRoad : Fragment() {
 
         someDataClass.let {
             login = it.dataUser!!
+            if (it.signal != null) {
+                signalArrayList = it.signal!!
+            }
         }
         if (login.firebase_auth == 1) {
 
@@ -78,7 +83,7 @@ class TypeRoad : Fragment() {
             //Attaching only part of URL as base URL is given
             //in our GETAPIRequest(of course that need to be same for all case)
             getapiRequest.request(viewMain.context, fetchGetResultListener, url)
-            Toast.makeText(viewMain.context, "GET API called", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(viewMain.context, "GET API called", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -100,25 +105,28 @@ class TypeRoad : Fragment() {
             RequestQueueService.cancelProgressDialog()
             try {
                 //Now check result sent by our GETAPIRequest class
-                if (data != null) {
-                    if (data.has("success")) {
-                        val success = data.getInt("success")
-                        if (success == 1) {
-                            val response = data.getJSONObject("response")
-                            if (response != null) {
-                                //Display the result
-                                var array = response.toString(4)
-                                var tempValue = ConvertJSON(array)["data"]
-                                // Init Process
-                                initProcessGet(tempValue)
+                if (data.has("success")) {
+                    val success = data.getInt("success")
+                    if (success == 1) {
+                        val response = data.getJSONObject("response")
+                        if (response != null) {
+                            //Display the result
+                            var array = response.toString(4)
+                            var tempValue = ConvertJSON(array)["data"]
+                            // Init Process
+                            initProcessGet(tempValue)
 
-                            }
+                        }
+                    } else {
+                        val response = data.getJSONObject("response")
+                        if (response != null) {
+                            Log.e("Error", response.toString(4))
+                            val error = response.getString("error")
+                            RequestQueueService.showAlert(error, viewMain.context)
                         } else {
                             RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
                         }
                     }
-                } else {
-                    RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
                 }
             } catch (e: Exception) {
                 RequestQueueService.showAlert("Something went wrong", viewMain.context)
@@ -137,6 +145,30 @@ class TypeRoad : Fragment() {
 
     private fun initProcessGet(values: Any) {
         maxSignal = values as Int
+        if (maxSignal > 0) {
+            viewMain.findViewById<Button>(R.id.btn_urban).setOnClickListener {
+                setData("Urbana")
+                Navigation.findNavController(viewMain).navigate(R.id.geolocalization, bundle)
+            }
+
+            viewMain.findViewById<Button>(R.id.btn_rural).setOnClickListener {
+                setData("Rural")
+                Navigation.findNavController(viewMain).navigate(R.id.typeSignal, bundle)
+            }
+        }
+    }
+
+    private fun setData(typeSignal: String) {
+
+        // Make Object List Signal
+        var signsUp = CittisSignsUp(maxSignal, typeSignal, null)
+        signalArrayList.add(signsUp)
+        cittisDB.signal = signalArrayList
+        // Show Data
+        Log.e("Data-Login", cittisDB.toString())
+        // Set and Send Data Main
+        bundle.putParcelable("CittisDB", cittisDB)
+
     }
 
 

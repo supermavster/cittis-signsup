@@ -8,6 +8,9 @@ object EndPoints {
     // Users
     var FireBaseID = ""
 
+    /** Get Folder Main Images **/
+    const val IMAGE_DIRECTORY_NAME = "ITTUS"
+
     /** Server **/
     // Server Main 172.20.1.14 172.20.1.19 192.168.43.137 172.20.1.13
     private const val SERVER_MAIN = "signsup.cittis.com.co"//""ivs.cittis.com.co"

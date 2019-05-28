@@ -7,4 +7,6 @@ object ActionsRequest {
     const val RC_SIGN_IN = 9001
 
 
+    const val TAKE_PHOTO_REQUEST = 30
+
 }

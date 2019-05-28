@@ -70,7 +70,7 @@
               android:label="fragment_photos_gps" tools:layout="@layout/fragment_photos_gps">
         <action android:id="@+id/action_photosGps_to_finish" app:destination="@id/finish"/>
     </fragment>
-    <fragment android:id="@+id/geolocalization" android:name="com.cittis.signsup.Geolocalization"
+    <fragment android:id="@+id/geolocalization" android:name="com.cittis.signsup.view.Geolocation"
               android:label="fragment_geolocalization" tools:layout="@layout/fragment_geolocation">
         <action android:id="@+id/action_geolocalization_to_typeSignal" app:destination="@id/typeSignal"/>
     </fragment>

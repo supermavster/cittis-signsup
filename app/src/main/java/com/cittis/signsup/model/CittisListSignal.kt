@@ -7,9 +7,9 @@ import android.os.Parcelable
 data class CittisListSignal(
     var idProject: Int,
     var dataUser: DataUser?,
-    var municipality: Municipalities?
-    //var signal: ArrayList<CittusISV>?,
-    //var geolocationCardinalImages: ArrayList<GeolocationCardinalImages>?
+    var municipality: Municipalities?,
+    var signal: ArrayList<CittisSignsUp>?,
+    var geolocationCardinalImages: ArrayList<GeolocationCardinalImages>?
 ) : Parcelable {
 
     companion object {
@@ -21,26 +21,17 @@ data class CittisListSignal(
 
     }
 
-    constructor(dataUser: Parcel) : this(
-        dataUser.readInt(),
-        dataUser.readParcelable<DataUser>(DataUser::class.java.classLoader),
-        dataUser.readParcelable<Municipalities>(DataUser::class.java.classLoader)
-        //source.readParcelable(DataUser::class.java.classLoader)
-    )
-
-    /*
     constructor(source: Parcel) : this(
-
-        //source.readParcelable(DataUser::class.java.classLoader)
-        //source.readParcelable(DataUser::class.java.classLoader)
-        /*  source.readParcelable(Municipalities::class.java.classLoader),
-        arrayListOf<CittusISV>().apply {
-            source.readArrayList(CittusISV::class.java.classLoader)
+        source.readInt(),
+        source.readParcelable<DataUser>(DataUser::class.java.classLoader),
+        source.readParcelable<Municipalities>(DataUser::class.java.classLoader),
+        arrayListOf<CittisSignsUp>().apply {
+            source.readArrayList(CittisSignsUp::class.java.classLoader)
         },
         arrayListOf<GeolocationCardinalImages>().apply {
             source.readArrayList(GeolocationCardinalImages::class.java.classLoader)
-        }*/
-    )*/
+        }
+    )
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.let {
@@ -48,7 +39,7 @@ data class CittisListSignal(
             dest.writeParcelable(dataUser, flags)
             // Data Municipality
             dest.writeParcelable(municipality, flags)
-            /*/ Cittus ISV - Signal
+            // Cittus ISV - Signal
             var size: Int? = signal?.size
             if (size == null) {
                 size = 0
@@ -63,7 +54,7 @@ data class CittisListSignal(
             }
             for (i in 0 until size) {
                 dest.writeParcelableArray(arrayOf(geolocationCardinalImages?.get(i)), flags)
-            }*/
+            }
         }
     }
 
@@ -71,6 +62,6 @@ data class CittisListSignal(
 
     override fun toString(): String {
         //return "[{\"CittusListSignal\":{\"login\":\"$login\",$municipality,\"CittusISV\":{$signal},\"GeolocationCardinalImages\":{$geolocationCardinalImages}}}]"
-        return "[{\"CittusListSignal\":{'idProject':$idProject,$dataUser,$municipality}}]"
+        return "[{\"CittusListSignal\":{\"idProject\":$idProject,$dataUser,$municipality,\"CittisSignsUp\":{$signal},\"GeolocationCardinalImages\":{$geolocationCardinalImages}}}]"
     }
 }

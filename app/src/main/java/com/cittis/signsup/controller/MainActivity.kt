@@ -3,16 +3,20 @@ package com.cittis.signsup.controller
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.cittis.signsup.R
 import com.cittis.signsup.actions.ActionsRequest
+import com.cittis.signsup.controller.plugins.TakePicture
+import com.cittis.signsup.view.Geolocation
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -83,6 +87,30 @@ class MainActivity : AppCompatActivity() {
         } else {
             //finish()
         }
+    }
+
+    // Camera Action // Return Intend Action
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        // Show Action And Values (Send Variables) - Intent
+        Log.e("Main Activity", requestCode.toString() + "->" + resultCode + "->" + data.toString())
+
+        // Get Fragment Called
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        // Select Case
+        when (requestCode) {
+            ActionsRequest.TAKE_PHOTO_REQUEST and RESULT_OK -> {
+                val fragment = navHostFragment!!.childFragmentManager.fragments[0] as Geolocation
+                // Call Method Fragment
+                processCapturedPhoto(fragment.getTakePictureMain(""))
+            }
+
+        }
+
+    }
+
+    private fun processCapturedPhoto(takePicture: TakePicture) {
+        takePicture.processCapturedPhoto(takePicture.getPath())
     }
 
 }

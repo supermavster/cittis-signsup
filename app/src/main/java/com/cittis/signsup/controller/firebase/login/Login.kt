@@ -476,7 +476,7 @@ class Login : Fragment() {
                 EndPoints.FireBasePath = dataUser.firebase_path
 
                 // Make Object Main
-                var cittisDB: CittisListSignal = CittisListSignal(values as Int, dataUser, null)
+                var cittisDB: CittisListSignal = CittisListSignal(values as Int, dataUser, null, null)
                 // Show Data
                 Log.e("Data-Login", cittisDB.toString())
                 // Set and Send Data Main

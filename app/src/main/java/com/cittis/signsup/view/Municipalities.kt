@@ -83,6 +83,7 @@ class Municipalities : Fragment() {
 
 
         var url = EndPoints.URL_GET_DEPARTMENTS_BY_IDFIREBASE("all", EndPoints.FireBaseID)
+        Log.e("data", url)
         getApiCall(url, "departments")
         viewMain.findViewById<Button>(R.id.buttonMain).setOnClickListener { view ->
 
@@ -155,28 +156,30 @@ class Municipalities : Fragment() {
             RequestQueueService.cancelProgressDialog()
             try {
                 //Now check result sent by our GETAPIRequest class
-                if (data != null) {
-                    if (data.has("success")) {
-                        val success = data.getInt("success")
-                        if (success == 1) {
-                            val response = data.getJSONObject("response")
-                            if (response != null) {
-                                //Display the result
-                                //Or, You can do whatever you need to do with the JSONObject
-                                var array = response.toString(4)
-                                var tempValue = ConvertJSON(array)["data"]
-                                // Init Process
-                                initProcessGet(tempValue)
-                            }
+                if (data.has("success")) {
+                    val success = data.getInt("success")
+                    if (success == 1) {
+                        val response = data.getJSONObject("response")
+                        if (response != null) {
+                            //Display the result
+                            //Or, You can do whatever you need to do with the JSONObject
+                            Log.e("Data", response.toString(4))
+
+                            var array = response.toString(4)
+                            var tempValue = ConvertJSON(array)["data"]
+                            // Init Process
+                            initProcessGet(tempValue)
+                        }
+                    } else {
+                        val response = data.getJSONObject("response")
+                        if (response != null) {
+                            Log.e("Error", response.toString(4))
+                            val error = response.getString("error")
+                            RequestQueueService.showAlert(error, viewMain.context)
                         } else {
-                            RequestQueueService.showAlert(
-                                "Error! No data fetched",
-                                viewMain.context
-                            )
+                            RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
                         }
                     }
-                } else {
-                    RequestQueueService.showAlert("Error! No data fetched", viewMain.context)
                 }
             } catch (e: Exception) {
                 RequestQueueService.showAlert("Something went wrong", viewMain.context)
