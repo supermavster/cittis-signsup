@@ -4,6 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class CittisSignsUp(var count: Int, var typeRoad: String?, var typeSignal: String?) : Parcelable {
+
+    // Variables
+
+    // Horizontal
+    var horizontalSignal: HorizontalSignals? = null
+    // Vertical
+    var verticalSignal: VerticalSignals? = null
+
+
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Municipalities> = object : Parcelable.Creator<Municipalities> {
@@ -30,14 +39,14 @@ data class CittisSignsUp(var count: Int, var typeRoad: String?, var typeSignal: 
     override fun describeContents(): Int = 0
 
     override fun toString(): String {
-        /*
+
         var typeSignalMain = when (typeSignal) {
             "Vertical" -> this.verticalSignal
             "Horizontal" -> this.horizontalSignal
             else -> null
         }
-        return "\"$count\":{\"typeSignal\":\"$typeSignal\",$imagesByCode,$locationSignal,$cittusSignal,$typeSignalMain}"
-        */
+        //return "\"$count\":{\"typeRoad\":\"$typeRoad\",\"typeSignal\":\"$typeSignal\",$imagesByCode,$locationSignal,$cittusSignal,$typeSignalMain}";
+
         return "\"$count\":{\"typeRoad\":\"$typeRoad\",\"typeSignal\":\"$typeSignal\"}"
     }
 

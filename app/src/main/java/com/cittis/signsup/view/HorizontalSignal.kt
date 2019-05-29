@@ -6,15 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import androidx.navigation.Navigation
 import com.cittis.signsup.R
-import com.cittis.signsup.model.CittisListSignal
-import com.cittis.signsup.model.CittisSignsUp
-import com.cittis.signsup.model.DataUser
+import com.cittis.signsup.actions.ActionsRequest
+import com.cittis.signsup.actions.EndPoints
+import com.cittis.signsup.model.*
 
-class TypeSignal : Fragment() {
-
+class HorizontalSignal : Fragment() {
     // Main Variables
     private var fragment = this
     private lateinit var viewMain: View
@@ -31,7 +30,7 @@ class TypeSignal : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Init View
-        viewMain = inflater.inflate(R.layout.fragment_type_signal, container, false)
+        viewMain = inflater.inflate(R.layout.fragment_horizontal_signal, container, false)
         return viewMain
     }
 
@@ -55,21 +54,40 @@ class TypeSignal : Fragment() {
     }
 
     private fun initProcess() {
-        viewMain.findViewById<Button>(R.id.btn_horizontal).setOnClickListener {
-            setData("Horizontal")
-            Navigation.findNavController(viewMain).navigate(R.id.horizontalSignal, bundle)
+        viewMain.findViewById<ImageButton>(R.id.ibtn_stretch).setOnClickListener {
+            makeActivityImages(R.string.title_horizontal_stretch, EndPoints.URL_GET_HORIZONTAL_STRETCH)
         }
 
-        viewMain.findViewById<Button>(R.id.btn_vertical).setOnClickListener {
-            setData("Vertical")
-            Navigation.findNavController(viewMain).navigate(R.id.verticalSignal, bundle)
+        viewMain.findViewById<ImageButton>(R.id.ibtn_intersection).setOnClickListener {
+            makeActivityImages(R.string.title_horizontal_intersection, EndPoints.URL_GET_HORIZONTAL_INTERSECTION)
         }
+
     }
 
-    private fun setData(typeSignal: String) {
+    private fun makeActivityImages(title: Int, url_img: String, code: Int = 1) {
+
+        var cittusImage =
+            CittisImage(resources.getString(title), url_img, code, ActionsRequest.GET_HORIZONTAL_IMAGES_VALUES)
+        bundle.putParcelable("CittusImage", cittusImage)
+
+        var locationOnTheWay = if (title == R.string.title_horizontal_intersection) {
+            "Intersección"
+        } else {
+            "Tramo"
+        }
+
+        // Location
+        var horizontalSignal = HorizontalSignals()
+        horizontalSignal.locationOnTheWay = locationOnTheWay
+
+        // Add Data
+        setData(horizontalSignal)
+    }
+
+    private fun setData(horizontalSignal: HorizontalSignals) {
         // Make Object - Cittis Signup
         var signsUp = signalArrayList[signalArrayList.size]
-        signsUp.typeSignal = typeSignal
+        signsUp.horizontalSignal = horizontalSignal
         // Reset
         signalArrayList[signalArrayList.size] = signsUp
         // Add to DB
@@ -78,6 +96,7 @@ class TypeSignal : Fragment() {
         Log.e("Data-Login", cittisDB.toString())
         // Set and Send Data Main
         bundle.putParcelable("CittisDB", cittisDB)
+        Navigation.findNavController(viewMain).navigate(R.id.mainImage, bundle)
 
     }
 }

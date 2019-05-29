@@ -29,7 +29,7 @@
         <action android:id="@+id/action_typeSignal_to_verticalSignal" app:destination="@id/verticalSignal"/>
         <action android:id="@+id/action_typeSignal_to_horizontalSignal" app:destination="@id/horizontalSignal"/>
     </fragment>
-    <fragment android:id="@+id/horizontalSignal" android:name="com.cittis.signsup.HorizontalSignal"
+    <fragment android:id="@+id/horizontalSignal" android:name="com.cittis.signsup.view.HorizontalSignal"
               android:label="fragment_horizontal_signal" tools:layout="@layout/fragment_horizontal_signal">
         <action android:id="@+id/action_horizontalSignal_to_mainImage" app:destination="@id/mainImage"/>
     </fragment>
@@ -44,7 +44,7 @@
               tools:layout="@layout/fragment_vertical_informative_signal">
         <action android:id="@+id/action_verticalInformativeSignal_to_mainImage" app:destination="@id/mainImage"/>
     </fragment>
-    <fragment android:id="@+id/mainImage" android:name="com.cittis.signsup.MainImage"
+    <fragment android:id="@+id/mainImage" android:name="com.cittis.signsup.view.MainImage"
               android:label="fragment_main_image" tools:layout="@layout/fragment_main_image">
         <action android:id="@+id/action_mainImage_to_adressLocation" app:destination="@id/adressLocation"/>
         <action android:id="@+id/action_mainImage_to_variableSignal" app:destination="@id/variableSignal"/>

@@ -143,6 +143,21 @@
     <string name="resume">resume</string>
     <string name="count">Cantidad de Señales Registradas</string>
 
+    <!-- Information Labels -->
+    // Labels Activities Images
+    <string name="title_horizontal_stretch">Horizontal Tramo</string>
+    <string name="title_horizontal_intersection">Horizontal Intersección</string>
+
+    <string name="title_vertical_info_localization">Información de Localización</string>
+    <string name="title_vertical_info_services">Información de Servicios</string>
+    <string name="title_vertical_info_turistic">Información de Turismo</string>
+
+    <string name="title_vertical_regulatory">Señales Reglamentarias</string>
+    <string name="title_vertical_preventives">Señales Preventivas</string>
+    <string name="title_vertical_work">Señales de Obra</string>
+    <string name="title_vertical_cycle_route"></string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

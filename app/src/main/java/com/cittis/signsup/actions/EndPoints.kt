@@ -84,5 +84,18 @@ object EndPoints {
         return "$URL_GET_COUNT_INVENTORY&idUserFirebase=$idUserFirebase"//1
     }
 
+    // Get Images
+
+    private const val URL_GET_IMAGES = "${PATH_API}signal="
+
+    const val URL_GET_VERTICAL_INFO_SERVICES = "${URL_GET_IMAGES}info&from=SI-07"
+    const val URL_GET_VERTICAL_INFO_TOURIST = "${URL_GET_IMAGES}turis"
+    const val URL_GET_VERTICAL_INFO_LOCATION = "${URL_GET_IMAGES}info&from=SI-01&to=SI-06"
+    const val URL_GET_VERTICAL_REGULATORY = "${URL_GET_IMAGES}regla"
+    const val URL_GET_VERTICAL_PREVENTIVES = "${URL_GET_IMAGES}prev"
+    const val URL_GET_VERTICAL_WORK = "${URL_GET_IMAGES}obra"
+    const val URL_GET_VERTICAL_CYCLE_ROUTE = "${URL_GET_IMAGES}cicl"
+    const val URL_GET_HORIZONTAL_STRETCH = "${URL_GET_IMAGES}tramo"
+    const val URL_GET_HORIZONTAL_INTERSECTION = "${URL_GET_IMAGES}inter"
 
 }
