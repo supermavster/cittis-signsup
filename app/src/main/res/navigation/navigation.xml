@@ -24,7 +24,7 @@
     </fragment>
     <fragment android:id="@+id/testAPIActivity" android:name="com.cittis.signsup.TestAPIActivity"
               android:label="TestAPIActivity"/>
-    <fragment android:id="@+id/typeSignal" android:name="com.cittis.signsup.TypeSignal"
+    <fragment android:id="@+id/typeSignal" android:name="com.cittis.signsup.view.TypeSignal"
               android:label="fragment_type_signal" tools:layout="@layout/fragment_type_signal">
         <action android:id="@+id/action_typeSignal_to_verticalSignal" app:destination="@id/verticalSignal"/>
         <action android:id="@+id/action_typeSignal_to_horizontalSignal" app:destination="@id/horizontalSignal"/>
