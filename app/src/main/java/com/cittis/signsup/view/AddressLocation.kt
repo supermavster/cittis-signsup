@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.navigation.Navigation
 import com.cittis.signsup.R
 import com.cittis.signsup.model.CittisListSignal
 import com.cittis.signsup.model.CittisSignsUp
@@ -121,6 +122,15 @@ class AdressLocation : Fragment() {
         Log.e("Data-Login", cittisDB.toString())
         // Set and Send Data Main
         bundle.putParcelable("CittisDB", cittisDB)
+
+        // Ids
+        var id = R.id.generalData
+        if (signalArrayList[signalArrayList.size - 1].typeSignal == "Vertical") {
+            //id = R.id.stateSignalActivity
+        }
+        // Start Activity
+        Navigation.findNavController(viewMain).navigate(id, bundle)
+
 
     }
 }
