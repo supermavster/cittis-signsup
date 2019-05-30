@@ -66,9 +66,10 @@ class HorizontalSignal : Fragment() {
 
     private fun makeActivityImages(title: Int, url_img: String, code: Int = 1) {
 
-        var cittusImage =
+        var cittisImage =
             CittisImage(resources.getString(title), url_img, code, ActionsRequest.GET_HORIZONTAL_IMAGES_VALUES)
-        bundle.putParcelable("CittusImage", cittusImage)
+        Log.e("data", cittisImage.toString())
+        bundle.putParcelable("CittisImage", cittisImage)
 
         var locationOnTheWay = if (title == R.string.title_horizontal_intersection) {
             "Intersección"
@@ -86,10 +87,10 @@ class HorizontalSignal : Fragment() {
 
     private fun setData(horizontalSignal: HorizontalSignals) {
         // Make Object - Cittis Signup
-        var signsUp = signalArrayList[signalArrayList.size]
+        var signsUp = signalArrayList[signalArrayList.size - 1]
         signsUp.horizontalSignal = horizontalSignal
         // Reset
-        signalArrayList[signalArrayList.size] = signsUp
+        signalArrayList[signalArrayList.size - 1] = signsUp
         // Add to DB
         cittisDB.signal = signalArrayList
         // Show Data

@@ -95,7 +95,7 @@ object EndPoints {
     const val URL_GET_VERTICAL_PREVENTIVES = "${URL_GET_IMAGES}prev"
     const val URL_GET_VERTICAL_WORK = "${URL_GET_IMAGES}obra"
     const val URL_GET_VERTICAL_CYCLE_ROUTE = "${URL_GET_IMAGES}cicl"
-    const val URL_GET_HORIZONTAL_STRETCH = "${URL_GET_IMAGES}tramo"
-    const val URL_GET_HORIZONTAL_INTERSECTION = "${URL_GET_IMAGES}inter"
+    const val URL_GET_HORIZONTAL_STRETCH = "${URL_GET_IMAGES}stretchsigns"
+    const val URL_GET_HORIZONTAL_INTERSECTION = "${URL_GET_IMAGES}intersectionsigns"
 
 }

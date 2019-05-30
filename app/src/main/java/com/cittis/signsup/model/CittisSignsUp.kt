@@ -6,6 +6,7 @@ import android.os.Parcelable
 data class CittisSignsUp(var count: Int, var typeRoad: String?, var typeSignal: String?) : Parcelable {
 
     // Variables
+    var imagesByCode: ImagenSignalCode? = null
 
     // Horizontal
     var horizontalSignal: HorizontalSignals? = null

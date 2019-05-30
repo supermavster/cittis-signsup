@@ -68,10 +68,10 @@ class TypeSignal : Fragment() {
 
     private fun setData(typeSignal: String) {
         // Make Object - Cittis Signup
-        var signsUp = signalArrayList[signalArrayList.size]
+        var signsUp = signalArrayList[signalArrayList.size - 1]
         signsUp.typeSignal = typeSignal
         // Reset
-        signalArrayList[signalArrayList.size] = signsUp
+        signalArrayList[signalArrayList.size - 1] = signsUp
         // Add to DB
         cittisDB.signal = signalArrayList
         // Show Data

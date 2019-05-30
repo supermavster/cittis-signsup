@@ -1,103 +1,134 @@
 package com.cittis.signsup.view
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Spinner
+import android.widget.TextView
+import androidx.navigation.Navigation
 import com.cittis.signsup.R
+import com.cittis.signsup.controller.images.MainImages
+import com.cittis.signsup.model.*
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MainImage.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MainImage.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class MainImage : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    // Main Variables
+    private var fragment = this
+    private lateinit var viewMain: View
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    // Make Bundle
+    val bundle = Bundle()
+    private lateinit var login: DataUser
+
+    // Data Base
+    private lateinit var cittisDB: CittisListSignal
+    private var signalArrayList = ArrayList<CittisSignsUp>()
+
+
+    // Variables locals - IMG
+    private var imagenSelect: CittisImage? = null
+    var mainImages: MainImages = MainImages()
+    internal var elementsBase = ArrayList<String>()
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_image, container, false)
+        // Init View
+        viewMain = inflater.inflate(R.layout.fragment_main_image, container, false)
+
+        return viewMain
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
+    // TODO: Get Data - Login
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Image
+        imagenSelect = arguments?.getParcelable("CittisImage")
+        // Get data from last Fragment
+        val someDataClass: CittisListSignal? = arguments?.getParcelable("CittisDB")
+        cittisDB = someDataClass!!
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+        someDataClass.let {
+            login = it.dataUser!!
+            if (it.signal != null) {
+                signalArrayList = it.signal!!
+            }
+
+        }
+        if (login.firebase_auth == 1) {
+            // Init Process
+            initProcess()
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
+    private fun initProcess() {
+        // Actions
+        actionsButtons()
+        // Save elements
+        saveElements()
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+    private fun actionsButtons() {
+        var viewPager = viewMain.findViewById<ViewPager>(R.id.viewPager)
+        var SliderDots = viewMain.findViewById<LinearLayout>(R.id.SliderDots)
+        var spinCode = viewMain.findViewById<Spinner>(R.id.spin_code_images)
+
+        // Start Process
+        mainImages.getValuesMain(imagenSelect!!, viewMain.context, fragment, viewPager, SliderDots, spinCode)
+
+        // Active Select
+        viewMain.findViewById<LinearLayout>(R.id.codeMain).visibility =
+            View.VISIBLE//findViewById(R.id.codeMain).setVisibility(intent.getBooleanExtra("code", true) ? View.VISIBLE : View.GONE);
+
+        // Set Template New Activity
+        viewMain.findViewById<TextView>(R.id.lbl_title_images).text = imagenSelect!!.title
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MainImage.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainImage().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun saveElements() {
+        viewMain.findViewById<Button>(R.id.btn_save_image).setOnClickListener {
+            // TODO: Get Data Images
+            // 0 -> Number
+            // 1 -> Code
+            // 2 -> Img Select
+            if (mainImages.spinner != null) {
+                val ss = mainImages.spinner!!.selectedItem.toString()
+                var arrayCodes = mainImages.arrayCodes
+                var arrayImages = mainImages.arrayImages
+                for (i in arrayCodes.indices) {
+                    if (arrayCodes[i] === ss) {
+                        elementsBase.add(0, i.toString())
+                        elementsBase.add(1, arrayCodes[i])
+                        elementsBase.add(2, arrayImages[i])
+                    }
                 }
+                // Array Add Images
+                var imagesByCode: ImagenSignalCode = ImagenSignalCode()
+                imagesByCode.idImagen = elementsBase[0].toInt()
+                imagesByCode.codeImagen = elementsBase[1]
+                imagesByCode.pathImagen = elementsBase[2]
+
+                // Make Object Main
+                // Make Object - Cittis Signup
+                var signsUp = signalArrayList[signalArrayList.size - 1]
+                signsUp.imagesByCode = imagesByCode
+                // Reset
+                signalArrayList[signalArrayList.size - 1] = signsUp
+                // Add to DB
+                cittisDB.signal = signalArrayList
+                // Show Data
+                Log.e("Data-Login", cittisDB.toString())
+                // Set and Send Data Main
+                bundle.putParcelable("CittisDB", cittisDB)
+                Navigation.findNavController(viewMain).navigate(R.id.adressLocation, bundle)
             }
+        }
     }
 }
