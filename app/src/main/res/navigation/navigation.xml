@@ -49,7 +49,7 @@
         <action android:id="@+id/action_mainImage_to_adressLocation" app:destination="@id/adressLocation"/>
         <action android:id="@+id/action_mainImage_to_variableSignal" app:destination="@id/variableSignal"/>
     </fragment>
-    <fragment android:id="@+id/adressLocation" android:name="com.cittis.signsup.AdressLocation"
+    <fragment android:id="@+id/adressLocation" android:name="com.cittis.signsup.view.AdressLocation"
               android:label="fragment_adress_location" tools:layout="@layout/fragment_address_location">
         <action android:id="@+id/action_adressLocation_to_generalData" app:destination="@id/generalData"/>
         <action android:id="@+id/action_adressLocation_to_stateSignal" app:destination="@id/stateSignal"/>

@@ -7,6 +7,7 @@ data class CittisSignsUp(var count: Int, var typeRoad: String?, var typeSignal: 
 
     // Variables
     var imagesByCode: ImagenSignalCode? = null
+    var locationSignal: LocationSignal? = null
 
     // Horizontal
     var horizontalSignal: HorizontalSignals? = null
