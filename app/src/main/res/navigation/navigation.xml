@@ -63,7 +63,7 @@
               android:label="fragment_state_signal" tools:layout="@layout/fragment_state_signal">
         <action android:id="@+id/action_stateSignal_to_statePost" app:destination="@id/statePost"/>
     </fragment>
-    <fragment android:id="@+id/statePost" android:name="com.cittis.signsup.StatePost"
+    <fragment android:id="@+id/statePost" android:name="com.cittis.signsup.view.StatePost"
               android:label="fragment_state_post" tools:layout="@layout/fragment_state_post">
         <action android:id="@+id/action_statePost_to_signalFlow" app:destination="@id/signalFlow"/>
     </fragment>
