@@ -33,10 +33,10 @@ class TakePicture(
     private var captureButton: CheckBox? = null
 
 
-    fun setIButton(imageView: ImageView, captureButton: CheckBox) {
+    fun setIButton(imageView: ImageView, captureButton: CheckBox, action: Int? = ActionsRequest.TAKE_PHOTO_REQUEST) {
         this.imageView = imageView
         this.captureButton = captureButton
-        launchCamera(ActionsRequest.TAKE_PHOTO_REQUEST)
+        launchCamera(action!!)
     }
 
     private fun launchCamera(request: Int) {

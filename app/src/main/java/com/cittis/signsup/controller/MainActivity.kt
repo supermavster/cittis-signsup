@@ -17,6 +17,7 @@ import com.cittis.signsup.R
 import com.cittis.signsup.actions.ActionsRequest
 import com.cittis.signsup.controller.plugins.TakePicture
 import com.cittis.signsup.view.Geolocation
+import com.cittis.signsup.view.PhotosGps
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -100,7 +101,14 @@ class MainActivity : AppCompatActivity() {
         // Select Case
         when (requestCode) {
             ActionsRequest.TAKE_PHOTO_REQUEST and RESULT_OK -> {
+                // todo_ check gps
                 val fragment = navHostFragment!!.childFragmentManager.fragments[0] as Geolocation
+                // Call Method Fragment
+                processCapturedPhoto(fragment.getTakePictureMain(""))
+            }
+            ActionsRequest.TAKE_PHOTO_GPS_REQUEST and RESULT_OK -> {
+                // todo_ check gps
+                val fragment = navHostFragment!!.childFragmentManager.fragments[0] as PhotosGps
                 // Call Method Fragment
                 processCapturedPhoto(fragment.getTakePictureMain(""))
             }

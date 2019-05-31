@@ -8,6 +8,8 @@ object ActionsRequest {
 
 
     const val TAKE_PHOTO_REQUEST = 30
+    const val TAKE_PHOTO_GPS_REQUEST = 31
+
 
     const val GET_HORIZONTAL_VALUES = 4
     const val GET_HORIZONTAL_IMAGES_VALUES = 41

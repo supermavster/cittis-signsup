@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_gps"
-        tools:context=".PhotosGps">
+        tools:context=".view.PhotosGps">
 
     <TextView
             android:text="@string/lbl_lat_lon"

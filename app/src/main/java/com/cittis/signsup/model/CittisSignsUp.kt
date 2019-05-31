@@ -8,6 +8,7 @@ data class CittisSignsUp(var count: Int, var typeRoad: String?, var typeSignal: 
     // Variables
     var imagesByCode: ImagenSignalCode? = null
     var locationSignal: LocationSignal? = null
+    var cittisSignal: CittisSignal? = null
 
     // Horizontal
     var horizontalSignal: HorizontalSignals? = null
@@ -47,9 +48,9 @@ data class CittisSignsUp(var count: Int, var typeRoad: String?, var typeSignal: 
             "Horizontal" -> this.horizontalSignal
             else -> null
         }
-        //return "\"$count\":{\"typeRoad\":\"$typeRoad\",\"typeSignal\":\"$typeSignal\",$imagesByCode,$locationSignal,$cittusSignal,$typeSignalMain}";
+        return "\"$count\":{\"typeRoad\":\"$typeRoad\",\"typeSignal\":\"$typeSignal\",$imagesByCode,$locationSignal,$cittisSignal,$typeSignalMain}"
 
-        return "\"$count\":{\"typeRoad\":\"$typeRoad\",\"typeSignal\":\"$typeSignal\"}"
+        //return "\"$count\":{\"typeRoad\":\"$typeRoad\",\"typeSignal\":\"$typeSignal\"}"
     }
 
 

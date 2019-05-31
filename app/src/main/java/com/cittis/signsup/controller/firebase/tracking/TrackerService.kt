@@ -8,10 +8,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.widget.EditText
 import com.cittis.signsup.R
 import com.cittis.signsup.actions.EndPoints
 import com.google.android.gms.location.LocationCallback
@@ -87,6 +89,50 @@ class TrackerService : Service() {
 
         }
     }
+
+    var dataTemp: Location? = null
+
+
+    fun getLocation(
+        context: Context,
+        txt_latitude: EditText,
+        txt_altitude: EditText,
+        txt_longitude: EditText
+    ) {
+        val request = LocationRequest()
+        request.interval = 10000
+        request.fastestInterval = 5000
+        request.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        val client = LocationServices.getFusedLocationProviderClient(context)
+        val path =
+            EndPoints.FireBasePath + "/" + EndPoints.FireBaseID //getString(R.string.firebase_path) + "/" + getString(R.string.transport_id);
+        val permission = ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+        if (permission == PackageManager.PERMISSION_GRANTED) {
+            // Request location updates and when an update is
+            // received, store the location in Firebase
+            var tempData = client.requestLocationUpdates(request, object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult?) {
+                    val ref = FirebaseDatabase.getInstance().getReference(path)
+                    val location: Location = locationResult!!.lastLocation
+                    // Add Data
+                    dataTemp = location
+
+                    // Data
+                    txt_latitude.setText(location.latitude.toString())
+                    txt_altitude.setText(location.altitude.toString())
+                    txt_longitude.setText(location.longitude.toString())
+
+                    ref.setValue(location)
+                }
+            }, null)
+
+
+        }
+    }
+
 
     companion object {
 

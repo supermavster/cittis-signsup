@@ -66,7 +66,7 @@
               android:label="fragment_state_post" tools:layout="@layout/fragment_state_post">
         <action android:id="@+id/action_statePost_to_signalFlow" app:destination="@id/signalFlow"/>
     </fragment>
-    <fragment android:id="@+id/photosGps" android:name="com.cittis.signsup.PhotosGps"
+    <fragment android:id="@+id/photosGps" android:name="com.cittis.signsup.view.PhotosGps"
               android:label="fragment_photos_gps" tools:layout="@layout/fragment_photos_gps">
         <action android:id="@+id/action_photosGps_to_finish" app:destination="@id/finish"/>
     </fragment>

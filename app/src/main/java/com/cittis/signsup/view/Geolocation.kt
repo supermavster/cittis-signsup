@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.Navigation
 import com.cittis.signsup.R
+import com.cittis.signsup.actions.ActionsRequest
 import com.cittis.signsup.controller.plugins.TakePicture
 import com.cittis.signsup.model.CittisListSignal
 import com.cittis.signsup.model.DataUser
@@ -70,22 +71,22 @@ class Geolocation : Fragment() {
     private fun cameraGeolocalization() {
         viewMain.findViewById<ImageButton>(R.id.ibtn_north).setOnClickListener {
             // Init Camera
-            takePicture.setIButton(viewMain.ibtn_north, viewMain.cb_north)
+            takePicture.setIButton(viewMain.ibtn_north, viewMain.cb_north, ActionsRequest.TAKE_PHOTO_REQUEST)
         }
 
         viewMain.findViewById<ImageButton>(R.id.ibtn_south).setOnClickListener {
             // Init Camera
-            takePicture.setIButton(viewMain.ibtn_south, viewMain.cb_south)
+            takePicture.setIButton(viewMain.ibtn_south, viewMain.cb_south, ActionsRequest.TAKE_PHOTO_REQUEST)
         }
 
         viewMain.findViewById<ImageButton>(R.id.ibtn_west).setOnClickListener {
             // Init Camera
-            takePicture.setIButton(viewMain.ibtn_west, viewMain.cb_west)
+            takePicture.setIButton(viewMain.ibtn_west, viewMain.cb_west, ActionsRequest.TAKE_PHOTO_REQUEST)
         }
 
         viewMain.findViewById<ImageButton>(R.id.ibtn_east).setOnClickListener {
             // Init Camera
-            takePicture.setIButton(viewMain.ibtn_east, viewMain.cb_east)
+            takePicture.setIButton(viewMain.ibtn_east, viewMain.cb_east, ActionsRequest.TAKE_PHOTO_REQUEST)
         }
     }
 
