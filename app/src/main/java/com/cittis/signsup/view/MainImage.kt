@@ -127,7 +127,7 @@ class MainImage : Fragment() {
                 Log.e("Data-Login", cittisDB.toString())
                 // Set and Send Data Main
                 bundle.putParcelable("CittisDB", cittisDB)
-                Navigation.findNavController(viewMain).navigate(R.id.adressLocation, bundle)
+                Navigation.findNavController(viewMain).navigate(R.id.addressLocation, bundle)
             }
         }
     }

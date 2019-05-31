@@ -46,10 +46,10 @@
     </fragment>
     <fragment android:id="@+id/mainImage" android:name="com.cittis.signsup.view.MainImage"
               android:label="fragment_main_image" tools:layout="@layout/fragment_main_image">
-        <action android:id="@+id/action_mainImage_to_adressLocation" app:destination="@id/adressLocation"/>
+        <action android:id="@+id/action_mainImage_to_adressLocation" app:destination="@id/addressLocation"/>
         <action android:id="@+id/action_mainImage_to_variableSignal" app:destination="@id/variableSignal"/>
     </fragment>
-    <fragment android:id="@+id/adressLocation" android:name="com.cittis.signsup.view.AdressLocation"
+    <fragment android:id="@+id/addressLocation" android:name="com.cittis.signsup.view.AddressLocation"
               android:label="fragment_adress_location" tools:layout="@layout/fragment_address_location">
         <action android:id="@+id/action_adressLocation_to_generalData" app:destination="@id/generalData"/>
         <action android:id="@+id/action_adressLocation_to_stateSignal" app:destination="@id/stateSignal"/>
@@ -76,7 +76,7 @@
     </fragment>
     <fragment android:id="@+id/variableSignal" android:name="com.cittis.signsup.VariableSignal"
               android:label="fragment_variable_signal" tools:layout="@layout/fragment_variable_signal">
-        <action android:id="@+id/action_variableSignal_to_adressLocation" app:destination="@id/adressLocation"/>
+        <action android:id="@+id/action_variableSignal_to_adressLocation" app:destination="@id/addressLocation"/>
     </fragment>
     <fragment android:id="@+id/signalFlow" android:name="com.cittis.signsup.SignalFlow"
               android:label="fragment_signal_flow" tools:layout="@layout/fragment_signal_flow">

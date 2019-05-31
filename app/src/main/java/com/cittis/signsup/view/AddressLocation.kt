@@ -16,7 +16,7 @@ import com.cittis.signsup.model.CittisSignsUp
 import com.cittis.signsup.model.DataUser
 import com.cittis.signsup.model.LocationSignal
 
-class AdressLocation : Fragment() {
+class AddressLocation : Fragment() {
     // Main Variables
     private var fragment = this
     private lateinit var viewMain: View
