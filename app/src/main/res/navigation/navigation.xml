@@ -82,7 +82,7 @@
               android:label="fragment_signal_flow" tools:layout="@layout/fragment_signal_flow">
         <action android:id="@+id/action_signalFlow_to_photosGps" app:destination="@id/photosGps"/>
     </fragment>
-    <fragment android:id="@+id/finish" android:name="com.cittis.signsup.Finish" android:label="fragment_finish"
+    <fragment android:id="@+id/finish" android:name="com.cittis.signsup.view.Finish" android:label="fragment_finish"
               tools:layout="@layout/fragment_finish">
         <action android:id="@+id/action_finish_to_typeRoad" app:destination="@id/typeRoad"/>
     </fragment>

@@ -98,4 +98,11 @@ object EndPoints {
     const val URL_GET_HORIZONTAL_STRETCH = "${URL_GET_IMAGES}stretchsigns"
     const val URL_GET_HORIZONTAL_INTERSECTION = "${URL_GET_IMAGES}intersectionsigns"
 
+    // Upload Images
+    // Upload Photo
+    const val SERVER_URL = "${PATH_MAIN}UploadFiles.php"
+
+    // Add Signal
+    const val URL_ADD_SIGNAL = "${PATH_API}add=signal"
+
 }
