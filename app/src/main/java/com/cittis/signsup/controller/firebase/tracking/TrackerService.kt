@@ -100,8 +100,8 @@ class TrackerService : Service() {
         txt_longitude: EditText
     ) {
         val request = LocationRequest()
-        request.interval = 10000
-        request.fastestInterval = 5000
+        request.interval = 20000
+        request.fastestInterval = 10000
         request.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         val client = LocationServices.getFusedLocationProviderClient(context)
         val path =

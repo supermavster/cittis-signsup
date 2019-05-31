@@ -241,13 +241,16 @@ class MainImages {
                         sliderUtils = SliderUtils()
                         arrayCodes.add(objectTemp[1].toString())
                     }
-                    1 -> arrayImages.add(objectTemp[1].toString())
                     2 -> {
+                        arrayImages.add(objectTemp[1].toString())
                         imgURL = objectTemp[1].toString()
                         // Set Imagen parameter
                         sliderUtils.sliderImageUrl = imgURL as String
+
+
                         // Add Object to the Array
                         sliderImg!!.add(sliderUtils)
+
                     }
 
                 }

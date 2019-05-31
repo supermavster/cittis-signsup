@@ -1,4 +1,4 @@
-package com.cittis.signsup
+package com.cittis.signsup.controller.plugins
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.cittis.signsup.R
 import com.cittis.signsup.actions.FetchDataListener
 import com.cittis.signsup.connection.GETAPIRequest
 import com.cittis.signsup.connection.POSTAPIRequest

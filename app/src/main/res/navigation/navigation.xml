@@ -22,7 +22,7 @@
         <action android:id="@+id/action_typeRoad_to_typeSignal" app:destination="@id/typeSignal"/>
         <action android:id="@+id/action_typeRoad_to_geolocalization" app:destination="@id/geolocalization"/>
     </fragment>
-    <fragment android:id="@+id/testAPIActivity" android:name="com.cittis.signsup.TestAPIActivity"
+    <fragment android:id="@+id/testAPIActivity" android:name="com.cittis.signsup.controller.plugins.TestAPIActivity"
               android:label="TestAPIActivity"/>
     <fragment android:id="@+id/typeSignal" android:name="com.cittis.signsup.view.TypeSignal"
               android:label="fragment_type_signal" tools:layout="@layout/fragment_type_signal">

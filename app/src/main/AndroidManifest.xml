@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TestAPIActivity"
+        <activity android:name=".controller.plugins.TestAPIActivity"
                   android:theme="@style/AppTheme.NoActionBar"
         >
 
