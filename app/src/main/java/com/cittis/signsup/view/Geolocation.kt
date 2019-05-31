@@ -122,10 +122,30 @@ class Geolocation : Fragment() {
     fun getTakePictureMain(option: String): TakePicture {
         if (option != "") {
             when (option) {
-                "North" -> takePicture.setIButton(viewMain.ibtn_north, viewMain.cb_north)
-                "South" -> takePicture.setIButton(viewMain.ibtn_south, viewMain.cb_south)
-                "West" -> takePicture.setIButton(viewMain.ibtn_west, viewMain.cb_west)
-                "East" -> takePicture.setIButton(viewMain.ibtn_east, viewMain.cb_east)
+                "North" -> takePicture.setIButton(
+                    viewMain.ibtn_north,
+                    viewMain.cb_north,
+                    ActionsRequest.TAKE_PHOTO_REQUEST,
+                    false
+                )
+                "South" -> takePicture.setIButton(
+                    viewMain.ibtn_south,
+                    viewMain.cb_south,
+                    ActionsRequest.TAKE_PHOTO_REQUEST,
+                    false
+                )
+                "West" -> takePicture.setIButton(
+                    viewMain.ibtn_west,
+                    viewMain.cb_west,
+                    ActionsRequest.TAKE_PHOTO_REQUEST,
+                    false
+                )
+                "East" -> takePicture.setIButton(
+                    viewMain.ibtn_east,
+                    viewMain.cb_east,
+                    ActionsRequest.TAKE_PHOTO_REQUEST,
+                    false
+                )
             }
         }
 

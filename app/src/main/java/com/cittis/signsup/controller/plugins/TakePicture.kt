@@ -33,13 +33,18 @@ class TakePicture(
     private var captureButton: CheckBox? = null
 
 
-    fun setIButton(imageView: ImageView, captureButton: CheckBox, action: Int? = ActionsRequest.TAKE_PHOTO_REQUEST) {
+    fun setIButton(
+        imageView: ImageView,
+        captureButton: CheckBox,
+        action: Int? = ActionsRequest.TAKE_PHOTO_REQUEST,
+        info: Boolean? = true
+    ) {
         this.imageView = imageView
         this.captureButton = captureButton
-        launchCamera(action!!)
+        launchCamera(action!!, info!!)
     }
 
-    private fun launchCamera(request: Int) {
+    private fun launchCamera(request: Int, info: Boolean? = true) {
         val values = ContentValues(1)
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
         val fileUri = context.contentResolver
@@ -51,12 +56,14 @@ class TakePicture(
         if (intent.resolveActivity(context.packageManager) != null) {
             this.fileUri = fileUri
             mCurrentPhotoPath = fileUri.toString()
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
-            intent.addFlags(
-                Intent.FLAG_GRANT_READ_URI_PERMISSION
-                        or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-            )
-            context.startActivityForResult(intent, request)
+            if (info!!) {
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+                intent.addFlags(
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                            or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                )
+                context.startActivityForResult(intent, request)
+            }
         }
     }
 

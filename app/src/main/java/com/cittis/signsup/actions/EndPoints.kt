@@ -100,7 +100,7 @@ object EndPoints {
 
     // Upload Images
     // Upload Photo
-    const val SERVER_URL = "${PATH_MAIN}UploadFiles.php"
+    const val SERVER_URL = "${PATH_SOURCE}upload-files"
 
     // Add Signal
     const val URL_ADD_SIGNAL = "${PATH_API}add=signal"

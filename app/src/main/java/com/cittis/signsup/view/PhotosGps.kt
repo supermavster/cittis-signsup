@@ -233,17 +233,20 @@ class PhotosGps : Fragment() {
                 "front" -> takePicture.setIButton(
                     viewMain.ibtn_front,
                     viewMain.cb_front,
-                    ActionsRequest.TAKE_PHOTO_GPS_REQUEST
+                    ActionsRequest.TAKE_PHOTO_GPS_REQUEST,
+                    false
                 )
                 "back" -> takePicture.setIButton(
                     viewMain.ibtn_back,
                     viewMain.cb_back,
-                    ActionsRequest.TAKE_PHOTO_GPS_REQUEST
+                    ActionsRequest.TAKE_PHOTO_GPS_REQUEST,
+                    false
                 )
                 "plaque" -> takePicture.setIButton(
                     viewMain.ibtn_plaque,
                     viewMain.cb_plaque,
-                    ActionsRequest.TAKE_PHOTO_GPS_REQUEST
+                    ActionsRequest.TAKE_PHOTO_GPS_REQUEST,
+                    false
                 )
             }
         }

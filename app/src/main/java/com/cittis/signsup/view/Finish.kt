@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.cittis.signsup.R
-import com.cittis.signsup.actions.EndPoints
 import com.cittis.signsup.actions.FetchDataListener
 import com.cittis.signsup.connection.POSTAPIRequest
 import com.cittis.signsup.connection.RequestQueueService
@@ -95,7 +94,10 @@ class Finish : Fragment() {
     private fun uploadDataBase() {
         if (signalArrayList != null) {
             // Set Dates
-            postApiCall(EndPoints.URL_ADD_SIGNAL)
+            //postApiCall(EndPoints.URL_ADD_SIGNAL)
+            Log.e("Full", cittisDB.toString())
+            // Upload Images
+            uploadImages()
         } else {
             message = "No se puede crear la señal, revise los datos por favor."
         }
