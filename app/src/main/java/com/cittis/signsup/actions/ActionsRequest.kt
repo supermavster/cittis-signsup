@@ -13,6 +13,7 @@ object ActionsRequest {
 
     const val GET_HORIZONTAL_VALUES = 4
     const val GET_HORIZONTAL_IMAGES_VALUES = 41
+    const val GET_VERTICAL_IMAGES_VALUES = 42
 
 
 }

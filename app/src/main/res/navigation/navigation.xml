@@ -33,7 +33,7 @@
               android:label="fragment_horizontal_signal" tools:layout="@layout/fragment_horizontal_signal">
         <action android:id="@+id/action_horizontalSignal_to_mainImage" app:destination="@id/mainImage"/>
     </fragment>
-    <fragment android:id="@+id/verticalSignal" android:name="com.cittis.signsup.VerticalSignal"
+    <fragment android:id="@+id/verticalSignal" android:name="com.cittis.signsup.view.VerticalSignal"
               android:label="fragment_vertical_signal" tools:layout="@layout/fragment_vertical_signal">
         <action android:id="@+id/action_verticalSignal_to_verticalInformativeSignal"
                 app:destination="@id/verticalInformativeSignal"/>
