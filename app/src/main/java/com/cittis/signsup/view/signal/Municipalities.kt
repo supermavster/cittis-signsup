@@ -23,6 +23,9 @@ import com.cittis.signsup.controller.plugins.JsonUtil2
 import com.cittis.signsup.model.CittisListSignal
 import com.cittis.signsup.model.DataUser
 import com.cittis.signsup.model.Municipalities
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -123,6 +126,31 @@ class Municipalities : Fragment() {
             // Init Action
             Navigation.findNavController(viewMain).navigate(R.id.typeRoad, bundle)
 
+        }
+
+        viewMain.findViewById<Button>(R.id.btn_salir).setOnClickListener {
+            // [START config_signin]
+            // Configure Google Sign In
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+            // [END config_signin]
+
+            var googleSignInClient = GoogleSignIn.getClient(viewMain.context, gso)
+
+
+            // [START initialize_auth]
+            // Initialize Firebase Auth
+            var auth = FirebaseAuth.getInstance()
+            // [END initialize_auth]
+
+            // TODO: SALIR
+            auth.signOut()
+            // Google sign out
+            googleSignInClient.signOut().addOnCompleteListener {
+                System.exit(0)
+            }
         }
     }
 
