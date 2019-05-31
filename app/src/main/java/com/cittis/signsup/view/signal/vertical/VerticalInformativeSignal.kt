@@ -84,9 +84,10 @@ class VerticalInformativeSignal : Fragment() {
     }
 
     private fun makeActivityImages(title: Int, url_img: String, code: Int = 1) {
-        var cittusImage =
+        var cittisImage =
             CittisImage(resources.getString(title), url_img, code, ActionsRequest.GET_VERTICAL_IMAGES_VALUES)
-        bundle.putParcelable("CittusImage", cittusImage)
+        Log.e("data", cittisImage.toString())
+        bundle.putParcelable("CittisImage", cittisImage)
 
         sendData(title)
     }
