@@ -12,27 +12,31 @@
     <TextView
             android:text="@string/lbl_location_way"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/textView4" android:textAlignment="center"
-            android:gravity="center" style="@style/CittisText"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4" android:textAlignment="center"
+            android:gravity="center" style="@style/CittisText"
+            android:layout_marginTop="16dp" android:layout_marginBottom="183dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/ibtn_stretch"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="41dp"
+    />
     <ImageButton
-            android:layout_width="294dp"
-            android:layout_height="107dp" app:srcCompat="@drawable/btn_tramo"
+            android:layout_width="0dp"
+            android:layout_height="110dp" app:srcCompat="@drawable/btn_tramo"
             android:id="@+id/ibtn_stretch" android:contentDescription="@string/btn_stretch"
-            android:scaleType="fitXY" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="240dp"
-            android:background="@android:drawable/screen_background_light_transparent"/>
+            android:scaleType="fitXY"
+            android:background="@android:drawable/screen_background_light_transparent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" android:layout_marginBottom="61dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/ibtn_intersection"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="58dp" android:layout_marginEnd="58dp"/>
     <ImageButton
-            android:layout_width="296dp"
-            android:layout_height="106dp" app:srcCompat="@drawable/btn_intersection"
+            android:layout_width="0dp"
+            android:layout_height="110dp" app:srcCompat="@drawable/btn_intersection"
             android:id="@+id/ibtn_intersection" android:contentDescription="@string/btn_intersection"
-            android:scaleType="fitXY" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.504"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/ibtn_stretch"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.2"
-            android:background="@android:drawable/screen_background_light_transparent"/>
+            android:scaleType="fitXY"
+            android:background="@android:drawable/screen_background_light_transparent"
+            app:layout_constraintTop_toBottomOf="@+id/ibtn_stretch" android:layout_marginBottom="217dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="57dp" android:layout_marginEnd="57dp"/>
 </android.support.constraint.ConstraintLayout>
