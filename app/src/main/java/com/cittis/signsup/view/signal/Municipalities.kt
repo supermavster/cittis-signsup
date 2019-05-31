@@ -1,11 +1,13 @@
 package com.cittis.signsup.view.signal
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -239,17 +241,22 @@ class Municipalities : Fragment() {
         // Set an item click listener for auto complete text view
         auto_complete_text_view.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                if (idObject == "departments") {
-                    val selectedItem = parent.getItemAtPosition(position).toString()
-                    // Display the clicked item using toast
-                    // Active Buttons
-                    viewMain.findViewById<AutoCompleteTextView>(R.id.auto_complete_municipio).isEnabled = true
-                    viewMain.findViewById<Button>(R.id.buttonMain).isEnabled = true
-                    // Add Actionsion(position).toString()
-                    val url = EndPoints.URL_GET_MUNICIPALITIES_BY_IDFIREBASE(selectedItem, EndPoints.FireBaseID)
-                    //Log.e("Data", url)
-                    getApiCall(url, "municipalities")
-                    //Toast.makeText(context,"Selected : $selectedItem", Toast.LENGTH_SHORT).show()
+                when (idObject) {
+                    "departments" -> {
+                        val selectedItem = parent.getItemAtPosition(position).toString()
+                        // Display the clicked item using toast
+                        // Active Buttons
+                        viewMain.findViewById<AutoCompleteTextView>(R.id.auto_complete_municipio).isEnabled = true
+                        viewMain.findViewById<Button>(R.id.buttonMain).isEnabled = true
+                        // Add Actionsion(position).toString()
+                        val url = EndPoints.URL_GET_MUNICIPALITIES_BY_IDFIREBASE(selectedItem, EndPoints.FireBaseID)
+                        //Log.e("Data", url)
+                        getApiCall(url, "municipalities")
+                        //Toast.makeText(context,"Selected : $selectedItem", Toast.LENGTH_SHORT).show()
+                    }
+                    "municipalities" -> {
+                        hideKeyboard(viewMain)
+                    }
                 }
             }
 
@@ -269,5 +276,9 @@ class Municipalities : Fragment() {
         }
     }
 
+    fun hideKeyboard(view: View) {
+        val imm = viewMain.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 
 }
