@@ -54,7 +54,7 @@
         <action android:id="@+id/action_adressLocation_to_generalData" app:destination="@id/generalData"/>
         <action android:id="@+id/action_adressLocation_to_stateSignal" app:destination="@id/stateSignal"/>
     </fragment>
-    <fragment android:id="@+id/generalData" android:name="com.cittis.signsup.GeneralData"
+    <fragment android:id="@+id/generalData" android:name="com.cittis.signsup.view.GeneralData"
               android:label="fragment_general_data" tools:layout="@layout/fragment_general_data">
         <action android:id="@+id/action_generalData_to_photosGps" app:destination="@id/photosGps"/>
     </fragment>

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
-        tools:context=".GeneralData">
+        tools:context=".view.GeneralData">
     <TextView
             android:text="@string/lbl_type_horizontal_signal"
             android:layout_width="wrap_content"
