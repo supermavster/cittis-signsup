@@ -14,27 +14,29 @@
             android:text="@string/btn_urban"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_urban" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_rural"
-            app:layout_constraintVertical_bias="0.636" style="@style/CittisButton" android:textSize="36sp"/>
+            android:id="@+id/btn_urban"
+            style="@style/CittisButton" android:textSize="36sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="204dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_rural"/>
     <Button
             android:background="@drawable/button"
             android:text="@string/btn_rural"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/btn_rural" android:layout_marginBottom="252dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            style="@style/CittisButton" android:textSize="36sp"/>
+            android:id="@+id/btn_rural"
+            style="@style/CittisButton" android:textSize="36sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="251dp" android:layout_marginTop="64dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_urban"/>
     <TextView
             android:text="@string/lbl_title_type_route"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/lbl_title_type_route" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_urban" app:layout_constraintVertical_bias="0.173"
-            style="@style/CittisText"/>
+            android:id="@+id/lbl_title_type_route"
+            style="@style/CittisText"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="27dp" app:layout_constraintEnd_toEndOf="parent"/>
 </android.support.constraint.ConstraintLayout>
