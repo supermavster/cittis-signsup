@@ -126,7 +126,7 @@ class AddressLocation : Fragment() {
         // Ids
         var id = R.id.generalData
         if (signalArrayList[signalArrayList.size - 1].typeSignal == "Vertical") {
-            //id = R.id.stateSignalActivity
+            id = R.id.stateSignal
         }
         // Start Activity
         Navigation.findNavController(viewMain).navigate(id, bundle)
