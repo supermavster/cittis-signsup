@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_state_signal"
-        tools:context=".StateSignal">
+        tools:context=".view.StateSignal">
 
     <TextView
             android:text="@string/lbl_size_signal"

@@ -59,7 +59,7 @@
               android:label="fragment_general_data" tools:layout="@layout/fragment_general_data">
         <action android:id="@+id/action_generalData_to_photosGps" app:destination="@id/photosGps"/>
     </fragment>
-    <fragment android:id="@+id/stateSignal" android:name="com.cittis.signsup.StateSignal"
+    <fragment android:id="@+id/stateSignal" android:name="com.cittis.signsup.view.StateSignal"
               android:label="fragment_state_signal" tools:layout="@layout/fragment_state_signal">
         <action android:id="@+id/action_stateSignal_to_statePost" app:destination="@id/statePost"/>
     </fragment>

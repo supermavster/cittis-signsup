@@ -17,7 +17,7 @@ import com.cittis.signsup.model.CittisSignsUp
 import com.cittis.signsup.model.DataUser
 import com.cittis.signsup.model.VerticalSignals
 
-class StatePost : Fragment() {
+class StateSignal : Fragment() {
     // Main Variables
     private var fragment = this
     private lateinit var viewMain: View
@@ -37,7 +37,7 @@ class StatePost : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Init View
-        viewMain = inflater.inflate(R.layout.fragment_state_post, container, false)
+        viewMain = inflater.inflate(R.layout.fragment_state_signal, container, false)
         return viewMain
     }
 
@@ -64,36 +64,36 @@ class StatePost : Fragment() {
     }
 
     private fun initProcess() {
-
-        // Button Post
-        buttonStay()
+        // Set Function - Size
+        buttonsSize()
         // Save Data
         btnSave()
     }
 
-    private fun buttonStay() {
-
-        viewMain.findViewById<ImageButton>(R.id.ibtn_self_signal).setOnClickListener {
-            viewMain.findViewById<RadioGroup>(R.id.rg_signal).check(R.id.rbtn_self_signal)
+    private fun buttonsSize() {
+        viewMain.findViewById<ImageButton>(R.id.ibtn_60).setOnClickListener {
+            viewMain.findViewById<RadioGroup>(R.id.rg_size).check(R.id.rbtn_60)
         }
 
-        viewMain.findViewById<ImageButton>(R.id.ibtn_light_signal).setOnClickListener {
-            viewMain.findViewById<RadioGroup>(R.id.rg_signal).check(R.id.rbtn_light_signal)
+        viewMain.findViewById<ImageButton>(R.id.ibtn_75).setOnClickListener {
+            viewMain.findViewById<RadioGroup>(R.id.rg_size).check(R.id.rbtn_75)
         }
 
-        viewMain.findViewById<ImageButton>(R.id.ibtn_wall_signal).setOnClickListener {
-            viewMain.findViewById<RadioGroup>(R.id.rg_signal).check(R.id.rbtn_wall_signal)
+        viewMain.findViewById<ImageButton>(R.id.ibtn_90).setOnClickListener {
+            viewMain.findViewById<RadioGroup>(R.id.rg_size).check(R.id.rbtn_90)
         }
 
+        viewMain.findViewById<ImageButton>(R.id.ibtn_120).setOnClickListener {
+            viewMain.findViewById<RadioGroup>(R.id.rg_size).check(R.id.rbtn_120)
+        }
     }
 
     private fun btnSave() {
-        viewMain.findViewById<Button>(R.id.btn_next_state_post).setOnClickListener {
-
+        viewMain.findViewById<Button>(R.id.btn_next_state_signal).setOnClickListener {
             // Get Data
             var data = getData()
-            verticalSignal!!.postTypeSignal = data[0]
-            verticalSignal!!.statePost = data[1].toFloat()
+            verticalSignal!!.sizeSignal = data[0]
+            verticalSignal!!.stateSingal = data[1].toFloat()
             // Make Object Main
             setData(verticalSignal!!)
         }
@@ -113,7 +113,7 @@ class StatePost : Fragment() {
         bundle.putParcelable("CittisDB", cittisDB)
 
         // Show data
-        Navigation.findNavController(viewMain).navigate(R.id.photosGps, bundle)
+        Navigation.findNavController(viewMain).navigate(R.id.statePost, bundle)
 
     }
 
@@ -122,15 +122,14 @@ class StatePost : Fragment() {
         // 0 -> Size
         // 1 -> Starts - State Post
         var tempArray: ArrayList<String> = ArrayList<String>()
-        var radioGroup = viewMain.findViewById<RadioGroup>(R.id.rg_signal)
+        var radioGroup = viewMain.findViewById<RadioGroup>(R.id.rg_size)
         var rb = viewMain.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
         tempArray.add(0, rb.text.toString())
 
-        // Todo Fix
-        //tempArray.add(1, viewMain.findViewById<RatingBar>(R.id.ratingBar).rating.toString())
+        // TODO FIX
+        //tempArray.add(1, viewMain.findViewById<RatingBar>(R.id.rb_state_signal).rating.toString())
         return tempArray
     }
-
 
     // Complements
     private fun checkSignal(type: String): Any? {
