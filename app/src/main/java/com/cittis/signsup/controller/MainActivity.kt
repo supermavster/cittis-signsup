@@ -16,8 +16,8 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.cittis.signsup.R
 import com.cittis.signsup.actions.ActionsRequest
 import com.cittis.signsup.controller.plugins.TakePicture
-import com.cittis.signsup.view.Geolocation
-import com.cittis.signsup.view.PhotosGps
+import com.cittis.signsup.view.signal.Geolocation
+import com.cittis.signsup.view.signal.PhotosGps
 import kotlinx.android.synthetic.main.activity_main.*
 
 

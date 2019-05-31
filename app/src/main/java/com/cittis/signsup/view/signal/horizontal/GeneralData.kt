@@ -1,4 +1,4 @@
-package com.cittis.signsup.view
+package com.cittis.signsup.view.signal.horizontal
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

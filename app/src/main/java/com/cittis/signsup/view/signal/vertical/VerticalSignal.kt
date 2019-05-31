@@ -1,4 +1,4 @@
-package com.cittis.signsup.view
+package com.cittis.signsup.view.signal.vertical
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,7 +13,7 @@ import com.cittis.signsup.actions.ActionsRequest
 import com.cittis.signsup.actions.EndPoints
 import com.cittis.signsup.model.*
 
-class VerticalInformativeSignal : Fragment() {
+class VerticalSignal : Fragment() {
     // Main Variables
     private var fragment = this
     private lateinit var viewMain: View
@@ -33,7 +33,7 @@ class VerticalInformativeSignal : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Init View
-        viewMain = inflater.inflate(R.layout.fragment_vertical_informative_signal, container, false)
+        viewMain = inflater.inflate(R.layout.fragment_vertical_signal, container, false)
         return viewMain
     }
 
@@ -57,29 +57,45 @@ class VerticalInformativeSignal : Fragment() {
     }
 
     private fun initProcess() {
-        // BTN Services
-        btnServices()
-        // BTN Touristic
-        btnTouristic()
-        // BTN Location
-        btnLocation()
+        // BTN Information
+        btnInformation()
+        // BTN Regulatory
+        btnRegulatory()
+        // BTN Preventive
+        btnPreventive()
+        // BTN Work
+        btnWork()
+        // BTN Cycle Route
+        btnCycleRoute()
     }
 
-    private fun btnServices() {
-        viewMain.findViewById<ImageButton>(R.id.ibtn_vts_informative_services).setOnClickListener { view ->
-            makeActivityImages(R.string.title_vertical_info_services, EndPoints.URL_GET_VERTICAL_INFO_SERVICES)
+    private fun btnInformation() {
+        viewMain.findViewById<ImageButton>(R.id.ibtn_vertical_informative).setOnClickListener { view ->
+            sendData(0, false)
         }
     }
 
-    private fun btnTouristic() {
-        viewMain.findViewById<ImageButton>(R.id.ibtn_vts_informative_turist).setOnClickListener {
-            makeActivityImages(R.string.title_vertical_info_turistic, EndPoints.URL_GET_VERTICAL_INFO_TOURIST)
+    private fun btnRegulatory() {
+        viewMain.findViewById<ImageButton>(R.id.ibtn_vertical_regulatory).setOnClickListener { view ->
+            makeActivityImages(R.string.title_vertical_regulatory, EndPoints.URL_GET_VERTICAL_REGULATORY)
         }
     }
 
-    private fun btnLocation() {
-        viewMain.findViewById<ImageButton>(R.id.ibtn_vts_informative_location).setOnClickListener {
-            makeActivityImages(R.string.title_vertical_info_localization, EndPoints.URL_GET_VERTICAL_INFO_LOCATION)
+    private fun btnPreventive() {
+        viewMain.findViewById<ImageButton>(R.id.ibtn_vertical_preventive).setOnClickListener { view ->
+            makeActivityImages(R.string.title_vertical_preventives, EndPoints.URL_GET_VERTICAL_PREVENTIVES)
+        }
+    }
+
+    private fun btnWork() {
+        viewMain.findViewById<ImageButton>(R.id.ibtn_vertical_work).setOnClickListener { view ->
+            makeActivityImages(R.string.title_vertical_work, EndPoints.URL_GET_VERTICAL_WORK)
+        }
+    }
+
+    private fun btnCycleRoute() {
+        viewMain.findViewById<ImageButton>(R.id.ibtn_vertical_cycle_route).setOnClickListener { view ->
+            makeActivityImages(R.string.title_vertical_cycle_route, EndPoints.URL_GET_VERTICAL_CYCLE_ROUTE)
         }
     }
 
@@ -99,12 +115,12 @@ class VerticalInformativeSignal : Fragment() {
         }
 
         verticalNameSignal = when (title) {
-            R.string.title_vertical_info_localization -> "Info. Localizacion"
-            R.string.title_vertical_info_services -> "Info. Servicios"
-            R.string.title_vertical_info_turistic -> "Info. Turismo"
+            R.string.title_vertical_regulatory -> "Reglamentaria"
+            R.string.title_vertical_preventives -> "Preventiva"
+            R.string.title_vertical_work -> "Obra"
+            R.string.title_vertical_cycle_route -> "Cicloruta"
             else -> ""
         }
-
         // Name Siganl Vertical
         var verticalSignal = VerticalSignals()
         verticalSignal.verticalNameSignal = verticalNameSignal

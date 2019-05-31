@@ -1,4 +1,4 @@
-package com.cittis.signsup.view
+package com.cittis.signsup.view.signal
 
 import android.net.Uri
 import android.os.Bundle
