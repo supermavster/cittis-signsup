@@ -39,7 +39,8 @@
                 app:destination="@id/verticalInformativeSignal"/>
         <action android:id="@+id/action_verticalSignal_to_mainImage" app:destination="@id/mainImage"/>
     </fragment>
-    <fragment android:id="@+id/verticalInformativeSignal" android:name="com.cittis.signsup.VerticalInformativeSignal"
+    <fragment android:id="@+id/verticalInformativeSignal"
+              android:name="com.cittis.signsup.view.VerticalInformativeSignal"
               android:label="fragment_vertical_informative_signal"
               tools:layout="@layout/fragment_vertical_informative_signal">
         <action android:id="@+id/action_verticalInformativeSignal_to_mainImage" app:destination="@id/mainImage"/>
