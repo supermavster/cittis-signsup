@@ -93,7 +93,7 @@ class StateSignal : Fragment() {
             // Get Data
             var data = getData()
             verticalSignal!!.sizeSignal = data[0]
-            verticalSignal!!.stateSingal = data[1].toFloat()
+            verticalSignal!!.stateSingal = 0f//data[1].toFloat()
             // Make Object Main
             setData(verticalSignal!!)
         }

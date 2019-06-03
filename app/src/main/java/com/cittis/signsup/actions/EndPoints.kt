@@ -97,6 +97,7 @@ object EndPoints {
     const val URL_GET_VERTICAL_CYCLE_ROUTE = "${URL_GET_IMAGES}ciclorutasigns"
     const val URL_GET_HORIZONTAL_STRETCH = "${URL_GET_IMAGES}stretchsigns"
     const val URL_GET_HORIZONTAL_INTERSECTION = "${URL_GET_IMAGES}intersectionsigns"
+    const val URL_GET_ANOTHER = "${URL_GET_IMAGES}another"
 
     // Upload Images
     // Upload Photo

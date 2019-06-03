@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.Navigation
 import com.cittis.signsup.R
+import com.cittis.signsup.actions.ActionsRequest
+import com.cittis.signsup.actions.EndPoints
+import com.cittis.signsup.model.CittisImage
 import com.cittis.signsup.model.CittisListSignal
 import com.cittis.signsup.model.CittisSignsUp
 import com.cittis.signsup.model.DataUser
@@ -64,6 +67,23 @@ class TypeSignal : Fragment() {
             setData("Vertical")
             Navigation.findNavController(viewMain).navigate(R.id.verticalSignal, bundle)
         }
+
+        viewMain.findViewById<Button>(R.id.btn_others).setOnClickListener {
+            setData("Another")
+            var cittisImage =
+                CittisImage(
+                    resources.getString(R.string.title_another),
+                    EndPoints.URL_GET_ANOTHER,
+                    1,
+                    ActionsRequest.GET_HORIZONTAL_IMAGES_VALUES
+                )
+            Log.e("data", cittisImage.toString())
+            bundle.putParcelable("CittisImage", cittisImage)
+
+            Navigation.findNavController(viewMain).navigate(R.id.mainImage, bundle)
+        }
+
+
     }
 
     private fun setData(typeSignal: String) {

@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.cittis.signsup.R
 import com.cittis.signsup.actions.ActionsRequest
+import com.cittis.signsup.controller.firebase.tracking.TrackerService
 import com.cittis.signsup.controller.plugins.TakePicture
 import com.cittis.signsup.view.signal.Geolocation
 import com.cittis.signsup.view.signal.PhotosGps
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startTrackerService() {
-        //startService(Intent(this, TrackerService::class.java))
+        startService(Intent(this, TrackerService::class.java))
         //finish()
     }
 

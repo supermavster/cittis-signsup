@@ -93,15 +93,22 @@
     <string name="lbl_location_and_signal">Y la:</string>
     <string name="lbl_location_with_signal">Con:</string>
     <string name="lbl_number">#</string>
+    <string name="lbl_score">-</string>
     <string name="lbl_state_signal">Estado de la Señal:</string>
     // Spinners
     <string-array name="spinner_zip">
         <item name="select">Seleccione</item>
-        <item name="spinner_zip_1">Carrera</item>
-        <item name="spinner_zip_2">Calle</item>
-        <item name="spinner_zip_3">Diagonal</item>
-        <item name="spinner_zip_4">Transversal</item>
-        <item name="spinner_zip_5">Avenida</item>
+        <item name="spinner_zip_1">Calle</item>
+        <item name="spinner_zip_2">Carrera</item>
+        <item name="spinner_zip_3">Avenida</item>
+        <item name="spinner_zip_4">Avenida Carrera</item>
+        <item name="spinner_zip_5">Avenida Calle</item>
+        <item name="spinner_zip_6">Circular</item>
+        <item name="spinner_zip_7">Circunvalar</item>
+        <item name="spinner_zip_8">Diagonal</item>
+        <item name="spinner_zip_9">Manzana</item>
+        <item name="spinner_zip_10">Transversal</item>
+        <item name="spinner_zip_11">Vía</item>
     </string-array>
 
     <!-- State Signal -->
@@ -155,7 +162,8 @@
     <string name="title_vertical_regulatory">Señales Reglamentarias</string>
     <string name="title_vertical_preventives">Señales Preventivas</string>
     <string name="title_vertical_work">Señales de Obra</string>
-    <string name="title_vertical_cycle_route"></string>
+    <string name="title_vertical_cycle_route">Señales de Cicloruta</string>
+    <string name="title_another">Otras Señales</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

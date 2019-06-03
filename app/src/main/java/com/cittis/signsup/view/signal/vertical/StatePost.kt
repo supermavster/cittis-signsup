@@ -93,7 +93,7 @@ class StatePost : Fragment() {
             // Get Data
             var data = getData()
             verticalSignal!!.postTypeSignal = data[0]
-            verticalSignal!!.statePost = data[1].toFloat()
+            verticalSignal!!.statePost = 0f//data[1].toFloat()
             // Make Object Main
             setData(verticalSignal!!)
         }

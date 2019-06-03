@@ -74,16 +74,7 @@ class GeneralData : Fragment() {
     private fun checkSignal(type: String): Any? {
         var tempData: Any? = null
         var count = 0
-        if (type == "Horizontal") {
-            var size = signalArrayList.size
-            for (i in 0 until size) {
-                var tempObject = signalArrayList[i].horizontalSignal
-                if (tempObject != null) {
-                    count = i
-                }
-            }
-            tempData = signalArrayList[count].horizontalSignal
-        } else if (type == "Vertical") {
+        if (type == "Vertical") {
             var size = signalArrayList.size
             for (i in 0 until size) {
                 var tempObject = signalArrayList[i].verticalSignal
@@ -92,6 +83,15 @@ class GeneralData : Fragment() {
                 }
             }
             tempData = signalArrayList[count].verticalSignal
+        } else {
+            var size = signalArrayList.size
+            for (i in 0 until size) {
+                var tempObject = signalArrayList[i].horizontalSignal
+                if (tempObject != null) {
+                    count = i
+                }
+            }
+            tempData = signalArrayList[count].horizontalSignal
         }
         return tempData
     }

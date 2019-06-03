@@ -28,6 +28,7 @@
               android:label="fragment_type_signal" tools:layout="@layout/fragment_type_signal">
         <action android:id="@+id/action_typeSignal_to_verticalSignal" app:destination="@id/verticalSignal"/>
         <action android:id="@+id/action_typeSignal_to_horizontalSignal" app:destination="@id/horizontalSignal"/>
+        <action android:id="@+id/action_typeSignal_to_mainImage" app:destination="@id/mainImage"/>
     </fragment>
     <fragment android:id="@+id/horizontalSignal"
               android:name="com.cittis.signsup.view.signal.horizontal.HorizontalSignal"

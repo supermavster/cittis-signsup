@@ -73,23 +73,34 @@ class AddressLocation : Fragment() {
 
         var spinLocationBetween: Spinner = viewMain.findViewById<Spinner>(R.id.spin_location_between_signal)
         var txtLocationBetween: EditText = viewMain.findViewById<EditText>(R.id.txt_location_between_signal)
+        var txtNumberLocationBetween: EditText =
+            viewMain.findViewById<EditText>(R.id.txt_number_location_between_signal)
+        var txtScoreLocationBetween: EditText = viewMain.findViewById<EditText>(R.id.txt_score_location_between_signal)
 
         var spinLocation: Spinner = viewMain.findViewById<Spinner>(R.id.spin_location_and_signal)
         var txtLocation: EditText = viewMain.findViewById<EditText>(R.id.txt_location_and_signal)
+        var txtNumberLocation: EditText = viewMain.findViewById<EditText>(R.id.txt_number_location_and_signal)
+        var txtScoreLocation: EditText = viewMain.findViewById<EditText>(R.id.txt_score_location_and_signal)
 
-        var spinLocationSignal: Spinner = viewMain.findViewById<Spinner>(R.id.spin_location_with_signal)
+        var spinLocationSignal: Spinner = viewMain.findViewById<Spinner>(R.id.spin_location_and_signal)
         var txtLocationSignal: EditText = viewMain.findViewById<EditText>(R.id.txt_location_with_signal)
+        var txtNumberLocationSignal: EditText = viewMain.findViewById<EditText>(R.id.txt_number_location_with_signal)
+        var txtScoreLocationSignal: EditText = viewMain.findViewById<EditText>(R.id.txt_score_location_with_signal)
 
 
-        tempLocationSignal = spinLocationBetween.selectedItem.toString() + " # " + txtLocationBetween.text.toString()
+        tempLocationSignal =
+            spinLocationBetween.selectedItem.toString() + " " + txtLocationBetween.text.toString() + " # " + txtNumberLocationBetween.text.toString() + " - " + txtScoreLocationBetween.text.toString()
         tempArray.add(0, tempLocationSignal)
 
-        tempLocationSignal = spinLocation.selectedItem.toString() + " # " + txtLocation.text.toString()
+        tempLocationSignal =
+            spinLocation.selectedItem.toString() + " " + txtLocation.text.toString() + " # " + txtNumberLocation.text.toString() + " - " + txtScoreLocation.text.toString()
         tempArray.add(1, tempLocationSignal)
 
-        tempLocationSignal = spinLocationSignal.selectedItem.toString() + " # " + txtLocationSignal.text.toString()
+        tempLocationSignal =
+            spinLocationSignal.selectedItem.toString() + " " + txtLocationSignal.text.toString() + " # " + txtNumberLocationSignal.text.toString() + " - " + txtScoreLocationSignal.text.toString()
         tempArray.add(2, tempLocationSignal)
 
+        tempLocationSignal = ""
         return tempArray
     }
 
